@@ -1,536 +1,2881 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
-<style>
-  :host {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    font-size: 14px;
-    color: #333;
-    box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    margin: 8px 0;
-  }
-
-  p {
-    margin: 0;
-  }
-
-  .spacer {
-    flex: 1;
-  }
-
-  .toolbar {
-    height: 60px;
-    margin: -8px;
-    display: flex;
-    align-items: center;
-    background-color: #1976d2;
-    color: white;
-    font-weight: 600;
-  }
-
-  .toolbar img {
-    margin: 0 16px;
-  }
-
-  .toolbar #twitter-logo {
-    height: 40px;
-    margin: 0 16px;
-  }
-
-  .toolbar #twitter-logo:hover {
-    opacity: 0.8;
-  }
-
-  .content {
-    display: flex;
-    margin: 32px auto;
-    padding: 0 16px;
-    max-width: 960px;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  svg.material-icons {
-    height: 24px;
-    width: auto;
-  }
-
-  svg.material-icons:not(:last-child) {
-    margin-right: 8px;
-  }
-
-  .card svg.material-icons path {
-    fill: #888;
-  }
-
-  .card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 16px;
-  }
-
-  .card {
-    border-radius: 4px;
-    border: 1px solid #eee;
-    background-color: #fafafa;
-    height: 40px;
-    width: 200px;
-    margin: 0 8px 16px;
-    padding: 16px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.2s ease-in-out;
-    line-height: 24px;
-  }
-
-  .card-container .card:not(:last-child) {
-    margin-right: 0;
-  }
-
-  .card.card-small {
-    height: 16px;
-    width: 168px;
-  }
-
-  .card-container .card:not(.highlight-card) {
-    cursor: pointer;
-  }
-
-  .card-container .card:not(.highlight-card):hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 17px rgba(black, 0.35);
-  }
-
-  .card-container .card:not(.highlight-card):hover .material-icons path {
-    fill: rgb(105, 103, 103);
-  }
-
-  .card.highlight-card {
-    background-color: #1976d2;
-    color: white;
-    font-weight: 600;
-    border: none;
-    width: auto;
-    min-width: 30%;
-    position: relative;
-  }
-
-  .card.card.highlight-card span {
-    margin-left: 60px;
-  }
-
-  svg#rocket {
-    width: 80px;
-    position: absolute;
-    left: -10px;
-    top: -24px;
-  }
-
-  svg#rocket-smoke {
-    height: 100vh;
-    position: absolute;
-    top: 10px;
-    right: 180px;
-    z-index: -10;
-  }
-
-  a,
-  a:visited,
-  a:hover {
-    color: #1976d2;
-    text-decoration: none;
-  }
-
-  a:hover {
-    color: #125699;
-  }
-
-  .terminal {
-    position: relative;
-    width: 80%;
-    max-width: 600px;
-    border-radius: 6px;
-    padding-top: 45px;
-    margin-top: 8px;
-    overflow: hidden;
-    background-color: rgb(15, 15, 16);
-  }
-
-  .terminal::before {
-    content: "\2022 \2022 \2022";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 4px;
-    background: rgb(58, 58, 58);
-    color: #c2c3c4;
-    width: 100%;
-    font-size: 2rem;
-    line-height: 0;
-    padding: 14px 0;
-    text-indent: 4px;
-  }
-
-  .terminal pre {
-    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
-    color: white;
-    padding: 0 1rem 1rem;
-    margin: 0;
-  }
-
-  .circle-link {
-    height: 40px;
-    width: 40px;
-    border-radius: 40px;
-    margin: 8px;
-    background-color: white;
-    border: 1px solid #eeeeee;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    transition: 1s ease-out;
-  }
-
-  .circle-link:hover {
-    transform: translateY(-0.25rem);
-    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
-  }
-
-  footer {
-    margin-top: 8px;
-    display: flex;
-    align-items: center;
-    line-height: 20px;
-  }
-
-  footer a {
-    display: flex;
-    align-items: center;
-  }
-
-  .github-star-badge {
-    color: #24292e;
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-    padding: 3px 10px;
-    border: 1px solid rgba(27,31,35,.2);
-    border-radius: 3px;
-    background-image: linear-gradient(-180deg,#fafbfc,#eff3f6 90%);
-    margin-left: 4px;
-    font-weight: 600;
-    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
-  }
-
-  .github-star-badge:hover {
-    background-image: linear-gradient(-180deg,#f0f3f6,#e6ebf1 90%);
-    border-color: rgba(27,31,35,.35);
-    background-position: -.5em;
-  }
-
-  .github-star-badge .material-icons {
-    height: 16px;
-    width: 16px;
-    margin-right: 4px;
-  }
-
-  svg#clouds {
-    position: fixed;
-    bottom: -160px;
-    left: -230px;
-    z-index: -10;
-    width: 1920px;
-  }
-
-
-  /* Responsive Styles */
-  @media screen and (max-width: 767px) {
-
-    .card-container > *:not(.circle-link) ,
-    .terminal {
-      width: 100%;
-    }
-
-    .card:not(.highlight-card) {
-      height: 16px;
-      margin: 8px 0;
-    }
-
-    .card.highlight-card span {
-      margin-left: 72px;
-    }
-
-    svg#rocket-smoke {
-      right: 120px;
-      transform: rotate(-5deg);
-    }
-  }
-
-  @media screen and (max-width: 575px) {
-    svg#rocket-smoke {
-      display: none;
-      visibility: hidden;
-    }
-  }
-</style>
-
-<!-- Toolbar -->
-<div class="toolbar" role="banner">
-  <img
-    width="40"
-    alt="Angular Logo"
-    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
-  />
-  <span>Welcome</span>
-    <div class="spacer"></div>
-  <a aria-label="Angular on twitter" target="_blank" rel="noopener" href="https://twitter.com/angular" title="Twitter">
-    
-    <svg id="twitter-logo" height="24" data-name="Logo — FIXED" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
-      <defs>
-        <style>
-          .cls-1 {
-            fill: none;
-          }
-
-          .cls-2 {
-            fill: #ffffff;
-          }
-        </style>
-      </defs>
-      <rect class="cls-1" width="400" height="400" />
-      <path class="cls-2" d="M153.62,301.59c94.34,0,145.94-78.16,145.94-145.94,0-2.22,0-4.43-.15-6.63A104.36,104.36,0,0,0,325,122.47a102.38,102.38,0,0,1-29.46,8.07,51.47,51.47,0,0,0,22.55-28.37,102.79,102.79,0,0,1-32.57,12.45,51.34,51.34,0,0,0-87.41,46.78A145.62,145.62,0,0,1,92.4,107.81a51.33,51.33,0,0,0,15.88,68.47A50.91,50.91,0,0,1,85,169.86c0,.21,0,.43,0,.65a51.31,51.31,0,0,0,41.15,50.28,51.21,51.21,0,0,1-23.16.88,51.35,51.35,0,0,0,47.92,35.62,102.92,102.92,0,0,1-63.7,22A104.41,104.41,0,0,1,75,278.55a145.21,145.21,0,0,0,78.62,23"
-      />
-    </svg>
-    
-  </a>
-</div>
-
-<div class="content" role="main">
-
-  <!-- Highlight Card -->
-  <div class="card highlight-card card-small">
-
-    <svg id="rocket" alt="Rocket Ship" xmlns="http://www.w3.org/2000/svg" width="101.678" height="101.678" viewBox="0 0 101.678 101.678">
-      <g id="Group_83" data-name="Group 83" transform="translate(-141 -696)">
-        <circle id="Ellipse_8" data-name="Ellipse 8" cx="50.839" cy="50.839" r="50.839" transform="translate(141 696)" fill="#dd0031"/>
-        <g id="Group_47" data-name="Group 47" transform="translate(165.185 720.185)">
-          <path id="Path_33" data-name="Path 33" d="M3.4,42.615a3.084,3.084,0,0,0,3.553,3.553,21.419,21.419,0,0,0,12.215-6.107L9.511,30.4A21.419,21.419,0,0,0,3.4,42.615Z" transform="translate(0.371 3.363)" fill="#fff"/>
-          <path id="Path_34" data-name="Path 34" d="M53.3,3.221A3.09,3.09,0,0,0,50.081,0,48.227,48.227,0,0,0,18.322,13.437c-6-1.666-14.991-1.221-18.322,7.218A33.892,33.892,0,0,1,9.439,25.1l-.333.666a3.013,3.013,0,0,0,.555,3.553L23.985,43.641a2.9,2.9,0,0,0,3.553.555l.666-.333A33.892,33.892,0,0,1,32.647,53.3c8.55-3.664,8.884-12.326,7.218-18.322A48.227,48.227,0,0,0,53.3,3.221ZM34.424,9.772a6.439,6.439,0,1,1,9.106,9.106,6.368,6.368,0,0,1-9.106,0A6.467,6.467,0,0,1,34.424,9.772Z" transform="translate(0 0.005)" fill="#fff"/>
-        </g>
-      </g>
-    </svg>
-
-    <span>{{ title }} app is running!</span>
-
-    <svg id="rocket-smoke" alt="Rocket Ship Smoke" xmlns="http://www.w3.org/2000/svg" width="516.119" height="1083.632" viewBox="0 0 516.119 1083.632">
-      <path id="Path_40" data-name="Path 40" d="M644.6,141S143.02,215.537,147.049,870.207s342.774,201.755,342.774,201.755S404.659,847.213,388.815,762.2c-27.116-145.51-11.551-384.124,271.9-609.1C671.15,139.365,644.6,141,644.6,141Z" transform="translate(-147.025 -140.939)" fill="#f5f5f5"/>
-    </svg>
-
-  </div>
-
-  <!-- Resources -->
-  <h2>Resources</h2>
-  <p>Here are some links to help you get started:</p>
-
-  <div class="card-container">
-    <a class="card" target="_blank" rel="noopener" href="https://angular.io/tutorial">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
-
-      <span>Learn Angular</span>
-
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>    </a>
-
-    <a class="card" target="_blank" rel="noopener" href="https://angular.io/cli">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
-
-      <span>CLI Documentation</span>
-
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-    </a>
-
-    <a class="card" target="_blank" rel="noopener" href="https://blog.angular.io/">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/></svg>
-
-      <span>Angular Blog</span>
-
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-    </a>
-
-  </div>
-
-  <!-- Next Steps -->
-  <h2>Next Steps</h2>
-  <p>What do you want to do next with your app?</p>
-
-  <input type="hidden" #selection>
-
-  <div class="card-container">
-    <div class="card card-small" (click)="selection.value = 'component'" tabindex="0">
-        <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-
-      <span>New Component</span>
+<!doctype html>
+<html xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml"
+  xmlns:website="http://ogp.me/ns/website" lang="en-US" class="touch-styles">
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- This is Squarespace. -->
+  <!-- project-sage -->
+  <base href="">
+  <meta charset="utf-8" />
+  <title>The Barbery London | Look Good, Feel Better</title>
+  <link rel="shortcut icon" type="image/x-icon" href="https://assets.squarespace.com/universal/default-favicon.ico" />
+  <link rel="canonical" href="https://www.thebarberylondon.com" />
+  <meta property="og:site_name" content="The Barbery London" />
+  <meta property="og:title" content="The Barbery London | Look Good, Feel Better" />
+  <meta property="og:url" content="https://www.thebarberylondon.com" />
+  <meta property="og:type" content="website" />
+  <meta property="og:description"
+    content="Looking for the best barber salon near you? We offer services and treatments created with your wellbeing in mind." />
+  <meta property="og:image"
+    content="http://static1.squarespace.com/static/5a254ea69f07f5c89412eac9/t/5ae2e9388a922d96eb658882/1524820318091/Logo_WEB.png?format=1500w" />
+  <meta property="og:image:width" content="1500" />
+  <meta property="og:image:height" content="534" />
+  <meta itemprop="name" content="The Barbery London &#124; Look Good, Feel Better" />
+  <meta itemprop="url" content="https://www.thebarberylondon.com" />
+  <meta itemprop="description"
+    content="Looking for the best barber salon near you? We offer services and treatments created with your wellbeing in mind." />
+  <meta itemprop="thumbnailUrl"
+    content="http://static1.squarespace.com/static/5a254ea69f07f5c89412eac9/t/5ae2e9388a922d96eb658882/1524820318091/Logo_WEB.png?format=1500w" />
+  <link rel="image_src"
+    href="http://static1.squarespace.com/static/5a254ea69f07f5c89412eac9/t/5ae2e9388a922d96eb658882/1524820318091/Logo_WEB.png?format=1500w" />
+  <meta itemprop="image"
+    content="http://static1.squarespace.com/static/5a254ea69f07f5c89412eac9/t/5ae2e9388a922d96eb658882/1524820318091/Logo_WEB.png?format=1500w" />
+  <meta name="twitter:title" content="The Barbery London &#124; Look Good, Feel Better" />
+  <meta name="twitter:image"
+    content="http://static1.squarespace.com/static/5a254ea69f07f5c89412eac9/t/5ae2e9388a922d96eb658882/1524820318091/Logo_WEB.png?format=1500w" />
+  <meta name="twitter:url" content="https://www.thebarberylondon.com" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:description"
+    content="Looking for the best barber salon near you? We offer services and treatments created with your wellbeing in mind." />
+  <meta name="description" content="Looking for the best barber salon near you? We offer services and 
+treatments created with your wellbeing in mind." />
+  <link rel="stylesheet" type="text/css"
+    href="//fonts.googleapis.com/css?family=Montserrat:700,400|Raleway:600,100,400,500,800,200,300,700,700i,300i" />
+  <script type="text/javascript">SQUARESPACE_ROLLUPS = {};</script>
+  <script>(function (rollups, name) { if (!rollups[name]) { rollups[name] = {}; } rollups[name].js = ["//assets.squarespace.com/universal/scripts-compressed/common-92bb76dc3ea6ea83bfa50-min.en-US.js"]; })(SQUARESPACE_ROLLUPS, 'squarespace-common');</script>
+  <script crossorigin="anonymous"
+    src="//assets.squarespace.com/universal/scripts-compressed/common-92bb76dc3ea6ea83bfa50-min.en-US.js"></script>
+  <script crossorigin="anonymous"
+    src="//assets.squarespace.com/universal/scripts-compressed/performance-0bdfa48973308ed9c8842-min.en-US.js"
+    defer></script>
+  <script
+    data-name="static-context">Static = window.Static || {}; Static.SQUARESPACE_CONTEXT = { "facebookAppId": "314192535267336", "rollups": { "squarespace-announcement-bar": { "css": "//assets.squarespace.com/universal/styles-compressed/announcement-bar-d41d8cd98f00b204e9800998ecf8427e-min.css", "js": "//assets.squarespace.com/universal/scripts-compressed/announcement-bar-0e7149b40bed1bc18710d-min.en-US.js" }, "squarespace-audio-player": { "css": "//assets.squarespace.com/universal/styles-compressed/audio-player-a57b8f3aa31918104f57a068648fbc63-min.css", "js": "//assets.squarespace.com/universal/scripts-compressed/audio-player-10ecc7ecf26a7b9b58356-min.en-US.js" }, "squarespace-blog-collection-list": { "css": "//assets.squarespace.com/universal/styles-compressed/blog-collection-list-d41d8cd98f00b204e9800998ecf8427e-min.css", "js": "//assets.squarespace.com/universal/scripts-compressed/blog-collection-list-ab4142fcacca918cf4e2d-min.en-US.js" }, "squarespace-calendar-block-renderer": { "css": "//assets.squarespace.com/universal/styles-compressed/calendar-block-renderer-a0cc7f57176bc63d87bc9f4149fada5a-min.css", "js": "//assets.squarespace.com/universal/scripts-compressed/calendar-block-renderer-a419a7d73c3f9856d03f6-min.en-US.js" }, "squarespace-chartjs-helpers": { "css": "//assets.squarespace.com/universal/styles-compressed/chartjs-helpers-9935a41d63cf08ca108505d288c1712e-min.css", "js": "//assets.squarespace.com/universal/scripts-compressed/chartjs-helpers-7686621b55e1e77041451-min.en-US.js" }, "squarespace-comments": { "css": "//assets.squarespace.com/universal/styles-compressed/comments-1637eb4ee93bed59528921026e024bf4-min.css", "js": "//assets.squarespace.com/universal/scripts-compressed/comments-da2a7113ca2f9a79294ff-min.en-US.js" }, "squarespace-commerce-cart": { "js": "//assets.squarespace.com/universal/scripts-compressed/commerce-cart-7728083c8c8e7fa91bb81-min.en-US.js" }, "squarespace-dialog": { "css": "//assets.squarespace.com/universal/styles-compressed/dialog-55710f039fb28505986e61d6b08d7fad-min.css", "js": "//assets.squarespace.com/universal/scripts-compressed/dialog-4bf2cbdc88745fe413ce4-min.en-US.js" }, "squarespace-events-collection": { "css": "//assets.squarespace.com/universal/styles-compressed/events-collection-a0cc7f57176bc63d87bc9f4149fada5a-min.css", "js": "//assets.squarespace.com/universal/scripts-compressed/events-collection-ba2a533c55bab689902bc-min.en-US.js" }, "squarespace-form-rendering-utils": { "js": "//assets.squarespace.com/universal/scripts-compressed/form-rendering-utils-a680d4394ef9194a62f06-min.en-US.js" }, "squarespace-forms": { "css": "//assets.squarespace.com/universal/styles-compressed/forms-6f75db26ac5a6772b018268d7fb910ca-min.css", "js": "//assets.squarespace.com/universal/scripts-compressed/forms-f935c80ac4d9ad6f1e17d-min.en-US.js" }, "squarespace-gallery-collection-list": { "css": "//assets.squarespace.com/universal/styles-compressed/gallery-collection-list-d41d8cd98f00b204e9800998ecf8427e-min.css", "js": "//assets.squarespace.com/universal/scripts-compressed/gallery-collection-list-5d5ff461e8bba64f298dc-min.en-US.js" }, "squarespace-image-zoom": { "css": "//assets.squarespace.com/universal/styles-compressed/image-zoom-72b0ab7796582588032aa6472e2e2f14-min.css", "js": "//assets.squarespace.com/universal/scripts-compressed/image-zoom-bb76f0f9dd663c789793c-min.en-US.js" }, "squarespace-pinterest": { "css": "//assets.squarespace.com/universal/styles-compressed/pinterest-d41d8cd98f00b204e9800998ecf8427e-min.css", "js": "//assets.squarespace.com/universal/scripts-compressed/pinterest-a7cf1f44e8653e4d0dfb0-min.en-US.js" }, "squarespace-popup-overlay": { "css": "//assets.squarespace.com/universal/styles-compressed/popup-overlay-62c9ec33d6124f4e3c04b78ce135a63e-min.css", "js": "//assets.squarespace.com/universal/scripts-compressed/popup-overlay-a07b2adc7a9878bab17bb-min.en-US.js" }, "squarespace-product-quick-view": { "css": "//assets.squarespace.com/universal/styles-compressed/product-quick-view-2573bf4ff7704c95ef4221f794e6b6b5-min.css", "js": "//assets.squarespace.com/universal/scripts-compressed/product-quick-view-696225c9e347170e5d834-min.en-US.js" }, "squarespace-products-collection-item-v2": { "css": "//assets.squarespace.com/universal/styles-compressed/products-collection-item-v2-72b0ab7796582588032aa6472e2e2f14-min.css", "js": "//assets.squarespace.com/universal/scripts-compressed/products-collection-item-v2-69badc258526c8eae029f-min.en-US.js" }, "squarespace-products-collection-list-v2": { "css": "//assets.squarespace.com/universal/styles-compressed/products-collection-list-v2-72b0ab7796582588032aa6472e2e2f14-min.css", "js": "//assets.squarespace.com/universal/scripts-compressed/products-collection-list-v2-061c91efd6e9a0ee0a494-min.en-US.js" }, "squarespace-search-page": { "css": "//assets.squarespace.com/universal/styles-compressed/search-page-ea3e98edb84abbc5e758884f69149027-min.css", "js": "//assets.squarespace.com/universal/scripts-compressed/search-page-d2b07d15c0ccfd38c2df2-min.en-US.js" }, "squarespace-search-preview": { "js": "//assets.squarespace.com/universal/scripts-compressed/search-preview-6d0a6c42615cc2193322e-min.en-US.js" }, "squarespace-share-buttons": { "js": "//assets.squarespace.com/universal/scripts-compressed/share-buttons-1d5e37e41e51c0442c45c-min.en-US.js" }, "squarespace-simple-liking": { "css": "//assets.squarespace.com/universal/styles-compressed/simple-liking-9ef41bf7ba753d65ec1acf18e093b88a-min.css", "js": "//assets.squarespace.com/universal/scripts-compressed/simple-liking-f27a039d90a7c5803e8be-min.en-US.js" }, "squarespace-social-buttons": { "css": "//assets.squarespace.com/universal/styles-compressed/social-buttons-bf7788a87c794b73afd9d5c49f72f4f3-min.css", "js": "//assets.squarespace.com/universal/scripts-compressed/social-buttons-3337156ba4aa3d11bb1ae-min.en-US.js" }, "squarespace-tourdates": { "css": "//assets.squarespace.com/universal/styles-compressed/tourdates-d41d8cd98f00b204e9800998ecf8427e-min.css", "js": "//assets.squarespace.com/universal/scripts-compressed/tourdates-a25bea999479f8dd3aab2-min.en-US.js" }, "squarespace-website-overlays-manager": { "css": "//assets.squarespace.com/universal/styles-compressed/website-overlays-manager-68df56a8135961401cbd590171d6b04a-min.css", "js": "//assets.squarespace.com/universal/scripts-compressed/website-overlays-manager-53acd24981dff77a83a7d-min.en-US.js" } }, "pageType": 1, "website": { "id": "5a254ea69f07f5c89412eac9", "identifier": "project-sage", "websiteType": 1, "contentModifiedOn": 1569935414550, "cloneable": false, "siteStatus": {}, "language": "en-US", "timeZone": "Europe/London", "machineTimeZoneOffset": 3600000, "timeZoneOffset": 3600000, "timeZoneAbbr": "BST", "siteTitle": "The Barbery London", "fullSiteTitle": "The Barbery London | Look Good, Feel Better", "siteTagLine": "Look Good, Feel Better", "siteDescription": "", "logoImageId": "5ae2e9388a922d96eb658882", "shareButtonOptions": { "4": true, "1": true, "5": true, "6": true, "7": true, "2": true, "3": true, "8": true }, "logoImageUrl": "//static1.squarespace.com/static/5a254ea69f07f5c89412eac9/t/5ae2e9388a922d96eb658882/1569935414550/", "authenticUrl": "https://www.thebarberylondon.com", "internalUrl": "https://project-sage.squarespace.com", "baseUrl": "https://www.thebarberylondon.com", "primaryDomain": "www.thebarberylondon.com", "sslSetting": 3, "isHstsEnabled": false, "socialAccounts": [{ "serviceId": 10, "userId": "6200102981", "userName": "thebarberylondon", "screenname": "The Barbery London", "addedOn": 1525222895220, "profileUrl": "http://instagram.com/thebarberylondon", "iconUrl": "https://scontent.cdninstagram.com/vp/0a2530e1a6cea6a59bbd443c029389b6/5B60A476/t51.2885-19/s150x150/30077496_2000886453571786_8596255074462728192_n.jpg", "collectionId": "5ae90def2714e568d498c450", "iconEnabled": true, "serviceName": "instagram" }, { "serviceId": 2, "userId": "140732043442074", "screenname": "Charl Ackerman", "addedOn": 1543504987407, "profileUrl": "https://business.facebook.com/TheBarberyLondon/?business_id=1682210118530648", "iconUrl": "http://graph.facebook.com/140732043442074/picture?type=square", "metaData": { "service": "facebook" }, "iconEnabled": true, "serviceName": "facebook" }], "typekitId": "", "statsMigrated": false, "imageMetadataProcessingEnabled": false, "showOwnerLogin": false }, "websiteSettings": { "id": "5a254ea69f07f5c89412eacc", "websiteId": "5a254ea69f07f5c89412eac9", "subjects": [], "country": "GB", "state": "ENG", "simpleLikingEnabled": true, "mobileInfoBarSettings": { "style": 1, "isContactEmailEnabled": false, "isContactPhoneNumberEnabled": false, "isLocationEnabled": false, "isBusinessHoursEnabled": false }, "commentLikesAllowed": true, "commentAnonAllowed": true, "commentThreaded": true, "commentApprovalRequired": false, "commentAvatarsOn": true, "commentSortType": 2, "commentFlagThreshold": 0, "commentFlagsAllowed": true, "commentEnableByDefault": true, "commentDisableAfterDaysDefault": 0, "disqusShortname": "", "commentsEnabled": false, "storeSettings": { "returnPolicy": null, "termsOfService": null, "privacyPolicy": null, "paymentSettings": {}, "expressCheckout": false, "continueShoppingLinkUrl": "/", "useLightCart": false, "showNoteField": false, "shippingCountryDefaultValue": "US", "billToShippingDefaultValue": false, "showShippingPhoneNumber": true, "isShippingPhoneRequired": false, "showBillingPhoneNumber": true, "isBillingPhoneRequired": false, "currenciesSupported": ["CHF", "HKD", "MXN", "EUR", "DKK", "USD", "CAD", "MYR", "NOK", "THB", "AUD", "SGD", "ILS", "PLN", "GBP", "CZK", "SEK", "NZD", "PHP", "RUB"], "defaultCurrency": "USD", "selectedCurrency": "USD", "measurementStandard": 1, "orderConfirmationInjectCode": "<!-- Facebook Pixel Code -->\n<script>\n\n!function(f,b,e,v,n,t,s)\n\n\n{if(f.fbq)return;n=f.fbq=function(){n.callMethod?\n\n\nn.callMethod.apply(n,arguments):n.queue.push(arguments)};\n\n\nif(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';\n\n\nn.queue=[];t=b.createElement(e);t.async=!0;\n\n\nt.src=v;s=b.getElementsByTagName(e)[0];\n\n\ns.parentNode.insertBefore(t,s)}(window,document,'script',\n\n\n'https://connect.facebook.net/en_US/fbevents.js');\n\n\nfbq('init', '798175923704296');\n\n\nfbq('track', 'PageView');\n\n<\/script>\n<noscript>\n<img height=\"1\" width=\"1\"\nsrc=\"https://www.facebook.com/tr?id=798175923704296&ev=PageView\n&noscript=1\"/>\n</noscript>\n<!-- End Facebook Pixel Code -->", "showCustomCheckoutForm": false, "enableMailingListOptInByDefault": false, "sameAsRetailLocation": false, "merchandisingSettings": { "scarcityEnabledOnProductItems": false, "scarcityEnabledOnProductBlocks": false, "scarcityMessageType": "DEFAULT_SCARCITY_MESSAGE", "scarcityThreshold": 10, "multipleQuantityAllowedForServices": true, "restockNotificationsEnabled": false, "restockNotificationsMailingListSignUpEnabled": false, "restockNotificationsMailingListOptInByDefault": false, "relatedProductsEnabled": false, "relatedProductsOrdering": "random", "soldOutVariantsDropdownDisabled": false }, "isLive": false, "multipleQuantityAllowedForServices": true }, "useEscapeKeyToLogin": true, "ssBadgeType": 1, "ssBadgePosition": 4, "ssBadgeVisibility": 1, "ssBadgeDevices": 1, "pinterestOverlayOptions": { "mode": "disabled" }, "ampEnabled": false }, "cookieSettings": { "isCookieBannerEnabled": false, "isRestrictiveCookiePolicyEnabled": false, "isRestrictiveCookiePolicyAbsolute": false, "cookieBannerText": "", "cookieBannerTheme": "", "cookieBannerVariant": "", "cookieBannerPosition": "", "cookieBannerCtaVariant": "", "cookieBannerCtaText": "" }, "websiteCloneable": false, "collection": { "title": "Home", "id": "5a25522f53450a9dabce088c", "fullUrl": "/", "type": 1 }, "subscribed": false, "appDomain": "squarespace.com", "templateTweakable": true, "tweakJSON": { "aspect-ratio": "Auto", "design": "Slideshow", "gallery-arrow-style": "No Background", "gallery-aspect-ratio": "3:2 Standard", "gallery-auto-crop": "true", "gallery-autoplay": "false", "gallery-controls": "Both", "gallery-design": "Grid", "gallery-info-overlay": "Show on Hover", "gallery-loop": "false", "gallery-navigation": "Bullets", "gallery-show-arrows": "true", "gallery-transitions": "Fade", "galleryArrowBackground": "rgba(34,34,34,1)", "galleryArrowColor": "rgba(255,255,255,1)", "galleryAutoplaySpeed": "3", "galleryCircleColor": "rgba(255,255,255,1)", "galleryInfoBackground": "rgba(0, 0, 0, .7)", "galleryThumbnailSize": "100px", "grid-aspect-ratio": "1:1 (Square)", "gridSize": "350px", "gridSpacing": "20px", "headerPadding": "30px", "homepage-index-nav": "Show On Scroll", "logoWidth": "265px", "product-gallery-auto-crop": "false", "product-image-auto-crop": "true", "siteTitleContainerWidth": "255px", "slideshow-aspect-ratio": "16:9 (Widescreen)", "slideshow-autoplay": "true", "slideshow-transition": "Fade", "tweak-v1-related-products-title-spacing": "50px" }, "templateId": "52e96934e4b0ea14d0f64568", "templateVersion": "7", "pageFeatures": [1, 2, 4], "gmRenderKey": "QUl6YVN5Q0JUUk9xNkx1dkZfSUUxcjQ2LVQ0QWVUU1YtMGQ3bXk4", "betaFeatureFlags": ["ORDERS-SERVICE-check-digital-good-access-with-service", "ORDERS-SERVICE-reset-digital-goods-access-with-service", "ORDERS-SERVICE-submit-order-through-service", "dg_downloads_from_fastly", "generic_iframe_loader_for_campaigns", "product-retriever-v2-enabled", "domain_registration_via_registrar_service", "domain_locking_via_registrar_service", "image_editor_experimental_features", "domain_deletion_via_registrar_service", "domain_info_via_registrar_service", "image_picker", "onboarding_wizard", "gallery_lightbox_71", "onboarding_cards_71", "member_email_verified_flag_migration", "commerce_related_products", "aureus_checkout_styles", "seven_one_manage_items_button", "seven_one_add_page", "seven_one_no_refresh_on_manage_items", "sold_out_in_variants_dropdown", "domains_rosetta_parking_page_onboarding"], "impersonatedSession": false, "tzData": { "zones": [[0, "EU", "GMT/BST", null]], "rules": { "EU": [[1981, "max", null, "Mar", "lastSun", "1:00u", "1:00", "S"], [1996, "max", null, "Oct", "lastSun", "1:00u", "0", null]] } } };</script>
+  <script type="text/javascript"> SquarespaceFonts.loadViaContext(); Squarespace.load(window);</script>
+  <link rel="alternate" type="application/rss+xml" title="RSS Feed"
+    href="https://www.thebarberylondon.com/home?format=rss" />
+  <script
+    type="application/ld+json">{"url":"https://www.thebarberylondon.com","name":"The Barbery London","description":"","image":"//static1.squarespace.com/static/5a254ea69f07f5c89412eac9/t/5ae2e9388a922d96eb658882/1569935414550/","@context":"http://schema.org","@type":"WebSite"}</script>
+  <!--[if gte IE 9]> <link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/5a254ea69f07f5c89412eac9/61/52e96934e4b0ea14d0f64568/5a254ea69f07f5c89412eade/1120-05142015/1557899306302/site.css?&filterFeatures=false&part=1"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/5a254ea69f07f5c89412eac9/61/52e96934e4b0ea14d0f64568/5a254ea69f07f5c89412eade/1120-05142015/1557899306302/site.css?&filterFeatures=false&part=2"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/5a254ea69f07f5c89412eac9/61/52e96934e4b0ea14d0f64568/5a254ea69f07f5c89412eade/1120-05142015/1557899306302/site.css?&filterFeatures=false&part=3"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/5a254ea69f07f5c89412eac9/61/52e96934e4b0ea14d0f64568/5a254ea69f07f5c89412eade/1120-05142015/1557899306302/site.css?&filterFeatures=false&part=4"/><![endif]-->
+  <!--[if lt IE 9]><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/5a254ea69f07f5c89412eac9/61/52e96934e4b0ea14d0f64568/5a254ea69f07f5c89412eade/1120-05142015/1557899306302/site.css?&filterFeatures=false&noMedia=true&part=1"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/5a254ea69f07f5c89412eac9/61/52e96934e4b0ea14d0f64568/5a254ea69f07f5c89412eade/1120-05142015/1557899306302/site.css?&filterFeatures=false&noMedia=true&part=2"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/5a254ea69f07f5c89412eac9/61/52e96934e4b0ea14d0f64568/5a254ea69f07f5c89412eade/1120-05142015/1557899306302/site.css?&filterFeatures=false&noMedia=true&part=3"/><link rel="stylesheet" type="text/css" href="//static1.squarespace.com/static/sitecss/5a254ea69f07f5c89412eac9/61/52e96934e4b0ea14d0f64568/5a254ea69f07f5c89412eade/1120-05142015/1557899306302/site.css?&filterFeatures=false&noMedia=true&part=4"/><![endif]-->
+  <!--[if !IE]> -->
+  <link rel="stylesheet" type="text/css"
+    href="//static1.squarespace.com/static/sitecss/5a254ea69f07f5c89412eac9/61/52e96934e4b0ea14d0f64568/5a254ea69f07f5c89412eade/1120-05142015/1557899306302/site.css?&filterFeatures=false" />
+  <!-- <![endif]-->
+  <!-- Facebook Pixel Code -->
+  <script>
+
+    !function (f, b, e, v, n, t, s) {
+      if (f.fbq) return; n = f.fbq = function () {
+        n.callMethod ?
+
+
+        n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+      };
+
+
+      if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+
+
+      n.queue = []; t = b.createElement(e); t.async = !0;
+
+
+      t.src = v; s = b.getElementsByTagName(e)[0];
+
+
+      s.parentNode.insertBefore(t, s)
+    }(window, document, 'script',
+
+
+      'https://connect.facebook.net/en_US/fbevents.js');
+
+
+    fbq('init', '798175923704296');
+
+
+    fbq('track', 'PageView');
+
+  </script>
+  <noscript>
+    <img height="1" width="1" src="https://www.facebook.com/tr?id=798175923704296&ev=PageView
+&noscript=1" />
+  </noscript>
+  <!-- End Facebook Pixel Code -->
+  <script>Static.COOKIE_BANNER_CAPABLE = true;</script>
+  <script>(function (i, s, o, g, r, a, m) { i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o), m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m) })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga'); ga('create', 'UA-116690900-1', 'auto'); ga('send', 'pageview');</script>
+  <!-- End of Squarespace Headers -->
+  <script>/* Must be below squarespace-headers */(function () { var touchTest = "ontouchstart" in window || navigator.msMaxTouchPoints; if (!touchTest) { with (document.documentElement) { className = className.replace(new RegExp("touch-styles"), "") } } })()</script>
+</head>
+
+<body id="collection-5a25522f53450a9dabce088c"
+  class="transparent-header  expand-homepage-index-links homepage-index-nav-show-on-scroll  index-section-separation-alternating-background design-slideshow grid-aspect-ratio-11-square grid-max-columns-four slideshow-aspect-ratio-169-widescreen slideshow-transition-fade slideshow-autoplay gallery-controls-both gallery-controls-color-light  meta-priority-date hide-entry-author  pre-footer-content-custom   show-category-navigation   event-show-past-events event-thumbnails event-thumbnail-size-32-standard event-date-label  event-list-show-cats event-list-date event-list-time event-list-address   event-icalgcal-links  event-excerpts  event-item-back-link    gallery-design-grid aspect-ratio-auto lightbox-style-dark gallery-navigation-bullets gallery-info-overlay-show-on-hover gallery-aspect-ratio-32-standard gallery-arrow-style-no-background gallery-transitions-fade gallery-show-arrows gallery-auto-crop   product-list-titles-under product-list-alignment-center product-item-size-11-square product-image-auto-crop product-gallery-size-11-square  show-product-price show-product-item-nav product-social-sharing tweak-v1-related-products-image-aspect-ratio-11-square tweak-v1-related-products-details-alignment-center newsletter-style-dark hide-opentable-icons opentable-style-dark small-button-style-solid small-button-shape-pill medium-button-style-outline medium-button-shape-square large-button-style-solid large-button-shape-square image-block-poster-text-alignment-center image-block-card-dynamic-font-sizing image-block-card-content-position-center image-block-card-text-alignment-left image-block-overlap-dynamic-font-sizing image-block-overlap-content-position-center image-block-overlap-text-alignment-left image-block-collage-dynamic-font-sizing image-block-collage-content-position-top image-block-collage-text-alignment-left image-block-stack-dynamic-font-sizing image-block-stack-text-alignment-left button-style-solid button-corner-style-pill tweak-product-quick-view-button-style-floating tweak-product-quick-view-button-position-bottom tweak-product-quick-view-lightbox-excerpt-display-truncate tweak-product-quick-view-lightbox-show-arrows tweak-product-quick-view-lightbox-show-close-button tweak-product-quick-view-lightbox-controls-weight-light native-currency-code-usd collection-5a25522f53450a9dabce088c collection-type-index collection-layout-default homepage view-list mobile-style-available logo-image has-banner-image index-page collection-home">
+
+  <div id="site">
+
+    <input type="checkbox" name="mobile-nav-toggle" id="mobileNavToggle" class="mobile-nav-toggle-box hidden" />
+
+    <div id="overlayNav">
+
+
+      <div id="mobileNavWrapper" class="nav-wrapper">
+        <nav id="mobileNavigation">
+
+
+
+          <div class="external">
+            <a href="/home">
+              Home
+            </a>
+          </div>
+
+
+
+
+
+
+
+          <div class="external">
+            <a href="/../#about-section">
+              About
+            </a>
+          </div>
+
+
+
+
+
+
+
+          <div class="external">
+            <a href="/../#treatments-section">
+              Treatments
+            </a>
+          </div>
+
+
+
+
+
+
+
+          <div class="external">
+            <a href="/../#products-section">
+              Products
+            </a>
+          </div>
+
+
+
+
+
+
+
+          <div class="external">
+            <a href="/contact">
+              Contact
+            </a>
+          </div>
+
+
+
+
+
+
+
+          <div class="external">
+            <a href="https://app.shedul.com/online_bookings/164425/link" target="_blank">
+              Book online
+            </a>
+          </div>
+
+
+
+
+
+
+
+
+        </nav>
+      </div>
+
+
     </div>
 
-    <div class="card card-small" (click)="selection.value = 'material'" tabindex="0">
-        <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+    <header id="header" role="banner">
+      <div class="header-inner">
+        <div id="logoWrapper" class="title-logo-wrapper" data-content-field="site-title">
 
-      <span>Angular Material</span>
-    </div>
+          <h1 id="logoImage" style="font-size: 20px;">Barbery Budapest</h1>
 
-    <div class="card card-small" (click)="selection.value = 'dependency'" tabindex="0">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-
-      <span>Add Dependency</span>
-    </div>
-
-    <div class="card card-small" (click)="selection.value = 'test'" tabindex="0">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-
-      <span>Run and Watch Tests</span>
-    </div>
-
-    <div class="card card-small" (click)="selection.value = 'build'" tabindex="0">
-      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-
-      <span>Build for Production</span>
-    </div>
-  </div>
-
-  <!-- Terminal -->
-  <div class="terminal" [ngSwitch]="selection.value">
-      <pre *ngSwitchDefault>ng generate component xyz</pre>
-      <pre *ngSwitchCase="'material'">ng add @angular/material</pre>
-      <pre *ngSwitchCase="'dependency'">ng add _____</pre>
-      <pre *ngSwitchCase="'test'">ng test</pre>
-      <pre *ngSwitchCase="'build'">ng build --prod</pre>
-  </div>
-
-  <!-- Links -->
-  <div class="card-container">
-    <a class="circle-link" title="Animations" href="https://angular.io/guide/animations" target="_blank" rel="noopener">
-      <svg id="Group_20" data-name="Group 20" xmlns="http://www.w3.org/2000/svg" width="21.813" height="23.453" viewBox="0 0 21.813 23.453">
-        <path id="Path_15" data-name="Path 15" d="M4099.584,972.736h0l-10.882,3.9,1.637,14.4,9.245,5.153,9.245-5.153,1.686-14.4Z" transform="translate(-4088.702 -972.736)" fill="#ffa726"/>
-        <path id="Path_16" data-name="Path 16" d="M4181.516,972.736v23.453l9.245-5.153,1.686-14.4Z" transform="translate(-4170.633 -972.736)" fill="#fb8c00"/>
-        <path id="Path_17" data-name="Path 17" d="M4137.529,1076.127l-7.7-3.723,4.417-2.721,7.753,3.723Z" transform="translate(-4125.003 -1058.315)" fill="#ffe0b2"/>
-        <path id="Path_18" data-name="Path 18" d="M4137.529,1051.705l-7.7-3.723,4.417-2.721,7.753,3.723Z" transform="translate(-4125.003 -1036.757)" fill="#fff3e0"/>
-        <path id="Path_19" data-name="Path 19" d="M4137.529,1027.283l-7.7-3.723,4.417-2.721,7.753,3.723Z" transform="translate(-4125.003 -1015.199)" fill="#fff"/>
-      </svg>
-    </a>
-
-    <a class="circle-link" title="CLI" href="https://cli.angular.io/" target="_blank" rel="noopener">
-      <svg alt="Angular CLI Logo" xmlns="http://www.w3.org/2000/svg" width="21.762" height="23.447" viewBox="0 0 21.762 23.447">
-        <g id="Group_21" data-name="Group 21" transform="translate(0)">
-          <path id="Path_20" data-name="Path 20" d="M2660.313,313.618h0l-10.833,3.9,1.637,14.4,9.2,5.152,9.244-5.152,1.685-14.4Z" transform="translate(-2649.48 -313.618)" fill="#37474f"/>
-          <path id="Path_21" data-name="Path 21" d="M2741.883,313.618v23.447l9.244-5.152,1.685-14.4Z" transform="translate(-2731.05 -313.618)" fill="#263238"/>
-          <path id="Path_22" data-name="Path 22" d="M2692.293,379.169h11.724V368.618h-11.724Zm11.159-.6h-10.608v-9.345h10.621v9.345Z" transform="translate(-2687.274 -362.17)" fill="#fff"/>
-          <path id="Path_23" data-name="Path 23" d="M2709.331,393.688l.4.416,2.265-2.28-2.294-2.294-.4.4,1.893,1.893Z" transform="translate(-2702.289 -380.631)" fill="#fff"/>
-          <rect id="Rectangle_12" data-name="Rectangle 12" width="3.517" height="0.469" transform="translate(9.709 13.744)" fill="#fff"/>
-        </g>
-      </svg>
-    </a>
-
-    <a class="circle-link" title="Augury" href="https://augury.rangle.io/" target="_blank" rel="noopener">
-      <svg alt="Angular Augury Logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="21.81" height="23.447" viewBox="0 0 21.81 23.447">
-        <defs>
-          <clipPath id="clip-path">
-            <rect id="Rectangle_13" data-name="Rectangle 13" width="10.338" height="10.27" fill="none"/>
-          </clipPath>
-        </defs>
-        <g id="Group_25" data-name="Group 25" transform="translate(0)">
-          <path id="Path_24" data-name="Path 24" d="M3780.155,311.417h0l-10.881,3.9,1.637,14.4,9.244,5.152,9.244-5.152,1.685-14.4Z" transform="translate(-3769.274 -311.417)" fill="#4a3493"/>
-          <path id="Path_25" data-name="Path 25" d="M3862.088,311.417v23.447l9.244-5.152,1.685-14.4Z" transform="translate(-3851.207 -311.417)" fill="#311b92"/>
-          <g id="Group_24" data-name="Group 24" transform="translate(6.194 6.73)" opacity="0.5">
-            <g id="Group_23" data-name="Group 23" transform="translate(0 0)">
-              <g id="Group_22" data-name="Group 22" clip-path="url(#clip-path)">
-                <path id="Path_26" data-name="Path 26" d="M3832.4,373.252a5.168,5.168,0,1,1-5.828-4.383,5.216,5.216,0,0,1,2.574.3,3.017,3.017,0,1,0,3.252,4.086Z" transform="translate(-3822.107 -368.821)" fill="#fff"/>
-              </g>
-            </g>
-          </g>
-          <path id="Path_27" data-name="Path 27" d="M3830.582,370.848a5.162,5.162,0,1,1-3.254-4.086,3.017,3.017,0,1,0,3.252,4.086Z" transform="translate(-3814.311 -359.969)" fill="#fff"/>
-        </g>
-      </svg>
-    </a>
-
-    <a class="circle-link" title="Protractor" href="https://www.protractortest.org/" target="_blank" rel="noopener">
-      <svg alt="Angular Protractor Logo" xmlns="http://www.w3.org/2000/svg" width="21.81" height="23.447" viewBox="0 0 21.81 23.447">
-        <g id="Group_26" data-name="Group 26" transform="translate(0)">
-          <path id="Path_28" data-name="Path 28" d="M4620.155,311.417h0l-10.881,3.9,1.637,14.4,9.244,5.152,9.244-5.152,1.685-14.4Z" transform="translate(-4609.274 -311.417)" fill="#e13439"/>
-          <path id="Path_29" data-name="Path 29" d="M4702.088,311.417v23.447l9.244-5.152,1.685-14.4Z" transform="translate(-4691.207 -311.417)" fill="#b52f32"/>
-          <path id="Path_30" data-name="Path 30" d="M4651.044,369.58v-.421h1.483a7.6,7.6,0,0,0-2.106-5.052l-1.123,1.123-.3-.3,1.122-1.121a7.588,7.588,0,0,0-4.946-2.055v1.482h-.421v-1.485a7.589,7.589,0,0,0-5.051,2.058l1.122,1.121-.3.3-1.123-1.123a7.591,7.591,0,0,0-2.106,5.052h1.482v.421h-1.489v1.734h15.241V369.58Zm-10.966-.263a4.835,4.835,0,0,1,9.67,0Z" transform="translate(-4634.008 -355.852)" fill="#fff"/>
-        </g>
-      </svg>
-    </a>
-
-    <a class="circle-link" title="Find a Local Meetup" href="https://www.meetup.com/find/?keywords=angular" target="_blank" rel="noopener">
-      <svg alt="Meetup Logo" xmlns="http://www.w3.org/2000/svg" width="24.607" height="23.447" viewBox="0 0 24.607 23.447">
-        <path id="logo--mSwarm" d="M21.221,14.95A4.393,4.393,0,0,1,17.6,19.281a4.452,4.452,0,0,1-.8.069c-.09,0-.125.035-.154.117a2.939,2.939,0,0,1-2.506,2.091,2.868,2.868,0,0,1-2.248-.624.168.168,0,0,0-.245-.005,3.926,3.926,0,0,1-2.589.741,4.015,4.015,0,0,1-3.7-3.347,2.7,2.7,0,0,1-.043-.38c0-.106-.042-.146-.143-.166a3.524,3.524,0,0,1-1.516-.69A3.623,3.623,0,0,1,2.23,14.557a3.66,3.66,0,0,1,1.077-3.085.138.138,0,0,0,.026-.2,3.348,3.348,0,0,1-.451-1.821,3.46,3.46,0,0,1,2.749-3.28.44.44,0,0,0,.355-.281,5.072,5.072,0,0,1,3.863-3,5.028,5.028,0,0,1,3.555.666.31.31,0,0,0,.271.03A4.5,4.5,0,0,1,18.3,4.7a4.4,4.4,0,0,1,1.334,2.751,3.658,3.658,0,0,1,.022.706.131.131,0,0,0,.1.157,2.432,2.432,0,0,1,1.574,1.645,2.464,2.464,0,0,1-.7,2.616c-.065.064-.051.1-.014.166A4.321,4.321,0,0,1,21.221,14.95ZM13.4,14.607a2.09,2.09,0,0,0,1.409,1.982,4.7,4.7,0,0,0,1.275.221,1.807,1.807,0,0,0,.9-.151.542.542,0,0,0,.321-.545.558.558,0,0,0-.359-.534,1.2,1.2,0,0,0-.254-.078c-.262-.047-.526-.086-.787-.138a.674.674,0,0,1-.617-.75,3.394,3.394,0,0,1,.218-1.109c.217-.658.509-1.286.79-1.918a15.609,15.609,0,0,0,.745-1.86,1.95,1.95,0,0,0,.06-1.073,1.286,1.286,0,0,0-1.051-1.033,1.977,1.977,0,0,0-1.521.2.339.339,0,0,1-.446-.042c-.1-.092-.2-.189-.307-.284a1.214,1.214,0,0,0-1.643-.061,7.563,7.563,0,0,1-.614.512A.588.588,0,0,1,10.883,8c-.215-.115-.437-.215-.659-.316a2.153,2.153,0,0,0-.695-.248A2.091,2.091,0,0,0,7.541,8.562a9.915,9.915,0,0,0-.405.986c-.559,1.545-1.015,3.123-1.487,4.7a1.528,1.528,0,0,0,.634,1.777,1.755,1.755,0,0,0,1.5.211,1.35,1.35,0,0,0,.824-.858c.543-1.281,1.032-2.584,1.55-3.875.142-.355.28-.712.432-1.064a.548.548,0,0,1,.851-.24.622.622,0,0,1,.185.539,2.161,2.161,0,0,1-.181.621c-.337.852-.68,1.7-1.018,2.552a2.564,2.564,0,0,0-.173.528.624.624,0,0,0,.333.71,1.073,1.073,0,0,0,.814.034,1.22,1.22,0,0,0,.657-.655q.758-1.488,1.511-2.978.35-.687.709-1.37a1.073,1.073,0,0,1,.357-.434.43.43,0,0,1,.463-.016.373.373,0,0,1,.153.387.7.7,0,0,1-.057.236c-.065.157-.127.316-.2.469-.42.883-.846,1.763-1.262,2.648A2.463,2.463,0,0,0,13.4,14.607Zm5.888,6.508a1.09,1.09,0,0,0-2.179.006,1.09,1.09,0,0,0,2.179-.006ZM1.028,12.139a1.038,1.038,0,1,0,.01-2.075,1.038,1.038,0,0,0-.01,2.075ZM13.782.528a1.027,1.027,0,1,0-.011,2.055A1.027,1.027,0,0,0,13.782.528ZM22.21,6.95a.882.882,0,0,0-1.763.011A.882.882,0,0,0,22.21,6.95ZM4.153,4.439a.785.785,0,1,0,.787-.78A.766.766,0,0,0,4.153,4.439Zm8.221,18.22a.676.676,0,1,0-.677.666A.671.671,0,0,0,12.374,22.658ZM22.872,12.2a.674.674,0,0,0-.665.665.656.656,0,0,0,.655.643.634.634,0,0,0,.655-.644A.654.654,0,0,0,22.872,12.2ZM7.171-.123A.546.546,0,0,0,6.613.43a.553.553,0,1,0,1.106,0A.539.539,0,0,0,7.171-.123ZM24.119,9.234a.507.507,0,0,0-.493.488.494.494,0,0,0,.494.494.48.48,0,0,0,.487-.483A.491.491,0,0,0,24.119,9.234Zm-19.454,9.7a.5.5,0,0,0-.488-.488.491.491,0,0,0-.487.5.483.483,0,0,0,.491.479A.49.49,0,0,0,4.665,18.936Z" transform="translate(0 0.123)" fill="#f64060"/>
-      </svg>
-    </a>
-
-    <a class="circle-link" title="Join the Conversation on Gitter" href="https://gitter.im/angular/angular" target="_blank" rel="noopener">
-      <svg alt="Gitter Logo" xmlns="http://www.w3.org/2000/svg" width="19.447" height="19.447" viewBox="0 0 19.447 19.447">
-        <g id="Group_40" data-name="Group 40" transform="translate(-1612 -405)">
-          <rect id="Rectangle_19" data-name="Rectangle 19" width="19.447" height="19.447" transform="translate(1612 405)" fill="#e60257"/>
-          <g id="gitter" transform="translate(1617.795 408.636)">
-            <g id="Group_33" data-name="Group 33" transform="translate(0 0)">
-              <rect id="Rectangle_15" data-name="Rectangle 15" width="1.04" height="9.601" transform="translate(2.304 2.324)" fill="#fff"/>
-              <rect id="Rectangle_16" data-name="Rectangle 16" width="1.04" height="9.601" transform="translate(4.607 2.324)" fill="#fff"/>
-              <rect id="Rectangle_17" data-name="Rectangle 17" width="1.04" height="4.648" transform="translate(6.91 2.324)" fill="#fff"/>
-              <rect id="Rectangle_18" data-name="Rectangle 18" width="1.04" height="6.971" transform="translate(0 0)" fill="#fff"/>
-            </g>
-          </g>
-        </g>
-      </svg>
-    </a>
-  </div>
-
-  <!-- Footer -->
-  <footer>
-      Love Angular?&nbsp;
-      <a href="https://github.com/angular/angular" target="_blank" rel="noopener"> Give our repo a star.
-        <div class="github-star-badge">
-            <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-          Star
         </div>
-      </a>
-      <a href="https://github.com/angular/angular" target="_blank" rel="noopener">
-        <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" fill="#1976d2"/><path d="M0 0h24v24H0z" fill="none"/></svg>
-      </a>
-  </footer>
+        <!-- comment the linebreak between these two elements because science
+          --><label for="mobileNavToggle" class="mobile-nav-toggle-label show-on-scroll-mobile">
+          <div class="top-bar"></div>
+          <div class="middle-bar"></div>
+          <div class="bottom-bar"></div>
+        </label>
+        <!-- comment the linebreak between these two elements because science
+          -->
+        <div id="headerNav" class="tmpl-loading">
 
-  <svg id="clouds" alt="Gray Clouds Background" xmlns="http://www.w3.org/2000/svg" width="2611.084" height="485.677" viewBox="0 0 2611.084 485.677">
-    <path id="Path_39" data-name="Path 39" d="M2379.709,863.793c10-93-77-171-168-149-52-114-225-105-264,15-75,3-140,59-152,133-30,2.83-66.725,9.829-93.5,26.25-26.771-16.421-63.5-23.42-93.5-26.25-12-74-77-130-152-133-39-120-212-129-264-15-54.084-13.075-106.753,9.173-138.488,48.9-31.734-39.726-84.4-61.974-138.487-48.9-52-114-225-105-264,15a162.027,162.027,0,0,0-103.147,43.044c-30.633-45.365-87.1-72.091-145.206-58.044-52-114-225-105-264,15-75,3-140,59-152,133-53,5-127,23-130,83-2,42,35,72,70,86,49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33,61.112,8.015,113.854-5.72,150.492-29.764a165.62,165.62,0,0,0,110.861-3.236c47,94,178,113,251,33,31.385,4.116,60.563,2.495,86.487-3.311,25.924,5.806,55.1,7.427,86.488,3.311,73,80,204,61,251-33a165.625,165.625,0,0,0,120,0c51,13,108,15,157-5a147.188,147.188,0,0,0,33.5-18.694,147.217,147.217,0,0,0,33.5,18.694c49,20,106,18,157,5a165.625,165.625,0,0,0,120,0c47,94,178,113,251,33C2446.709,1093.793,2554.709,922.793,2379.709,863.793Z" transform="translate(142.69 -634.312)" fill="#eee"/>
+          <div id="mainNavWrapper" class="nav-wrapper desktop-nav-wrapper show-on-scroll">
+            <nav id="mainNavigation" data-content-field="navigation">
+
+
+
+              <div class="external">
+                <a href="/home">
+                  Home
+                </a>
+              </div>
+
+
+
+
+
+
+
+              <div class="external">
+                <a href="/../#about-section">
+                  About
+                </a>
+              </div>
+
+
+
+
+
+
+
+              <div class="external">
+                <a href="/../#treatments-section">
+                  Treatments
+                </a>
+              </div>
+
+
+
+
+
+
+
+              <div class="external">
+                <a href="/../#products-section">
+                  Products
+                </a>
+              </div>
+
+
+
+
+
+
+
+              <div class="external">
+                <a href="/contact">
+                  Contact
+                </a>
+              </div>
+
+
+
+
+
+
+
+              <div class="external">
+                <a href="https://app.shedul.com/online_bookings/164425/link" target="_blank">
+                  Book online
+                </a>
+              </div>
+
+
+
+
+
+
+
+            </nav>
+          </div>
+          <!-- style below blocks out the mobile nav toggle only when nav is loaded -->
+          <style>
+            .mobile-nav-toggle-label {
+              display: inline-block;
+            }
+          </style>
+
+
+        </div>
+      </div>
+    </header>
+
+    <div id="siteWrapper" class="clearfix">
+
+      <!-- Banner -->
+
+
+
+      <!-- nothing to see here, move along -->
+
+
+
+
+
+
+
+      <main id="page" role="main">
+        <div id="content" class="main-content" data-content-field="main-content"
+          data-collection-id="5a25522f53450a9dabce088c">
+
+
+
+
+
+
+
+          <!-- Create index sections -->
+
+
+          <div id="top-section" class="index-section page" data-url-id="top"
+            data-collection-id="5a255251f9619a06b2ebe100" data-edit-main-image="Background">
+            <div class="index-section-wrapper has-main-media has-main-image">
+
+              <!-- For Pages -->
+
+
+
+
+
+              <div class="index-section-image content-fill">
+                <img
+                  data-src="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1557899296370-OY7N446G9ZA55UHAG73D/ke17ZwdGBToddI8pDm48kLkXF2pIyv_F2eUT9F60jBl7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0iyqMbMesKd95J-X4EagrgU9L3Sa3U8cogeb0tjXbfawd0urKshkc5MgdBeJmALQKw/felipe-p-lima-rizo-361947.jpg"
+                  data-image="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1557899296370-OY7N446G9ZA55UHAG73D/ke17ZwdGBToddI8pDm48kLkXF2pIyv_F2eUT9F60jBl7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0iyqMbMesKd95J-X4EagrgU9L3Sa3U8cogeb0tjXbfawd0urKshkc5MgdBeJmALQKw/felipe-p-lima-rizo-361947.jpg"
+                  data-image-dimensions="2500x1667" data-image-focal-point="0.5,0.5"
+                  alt="felipe-p-lima-rizo-361947.jpg" />
+              </div>
+              <div class="index-image-overlay"></div>
+
+
+
+              <div class="content page-content has-main-media has-main-image tmpl-loading" id="top-page"
+                data-url-id="top">
+                <div class="content-inner has-content">
+                  <div class="sqs-layout sqs-grid-12 columns-12" data-type="page" data-updated-on="1558539141509"
+                    id="page-5a255251f9619a06b2ebe100">
+                    <div class="row sqs-row">
+                      <div class="col sqs-col-12 span-12">
+                        <div class="sqs-block spacer-block sqs-block-spacer" data-aspect-ratio="6.91699604743083"
+                          data-block-type="21" id="block-yui_3_17_2_1_1413555146600_8643">
+                          <div class="sqs-block-content">&nbsp;</div>
+                        </div>
+                        <div class="sqs-block html-block sqs-block-html" data-block-type="2"
+                          id="block-2ed8c5e026ef40bb6eb6">
+                          <div class="sqs-block-content">
+                            <h1 style="white-space:pre-wrap; text-align: center;">SZLOGEN HERE</h1>
+                            <p class="" style="white-space:pre-wrap;">&nbsp;</p>
+                          </div>
+                        </div>
+                        <div class="sqs-block spacer-block sqs-block-spacer" data-aspect-ratio="8.49802371541502"
+                          data-block-type="21" id="block-yui_3_17_2_1_1413555146600_9259">
+                          <div class="sqs-block-content">&nbsp;</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- For Galleries -->
+
+
+
+              <!-- For Albums -->
+
+
+
+            </div>
+          </div>
+
+          <div id="about-section" class="index-section no-main-image page" data-url-id="about"
+            data-collection-id="5a255156652dea1c3d333c09" data-edit-main-image="Background">
+            <div class="index-section-wrapper">
+
+              <!-- For Pages -->
+
+
+
+
+
+
+
+              <div class="content page-content" id="about-page" data-url-id="about">
+                <div class="content-inner has-content">
+                  <div class="sqs-layout sqs-grid-12 columns-12" data-type="page" data-updated-on="1569934766879"
+                    id="page-5a255156652dea1c3d333c09">
+                    <div class="row sqs-row">
+                      <div class="col sqs-col-8 span-8">
+                        <div class="sqs-block html-block sqs-block-html" data-block-type="2"
+                          id="block-f51f808fa3878aff9137">
+                          <div class="sqs-block-content">
+                            <h2 style="white-space:pre-wrap;"><strong>Laci barber shopja</strong></h2>
+                            <p class="" style="white-space:pre-wrap;">&nbsp;</p>
+                            <p class="" style="white-space:pre-wrap;">Lorem ipsum text comes here </p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col sqs-col-1 span-1">
+                        <div class="sqs-block spacer-block sqs-block-spacer sized vsize-1" data-block-type="21"
+                          id="block-yui_3_17_2_1_1413555146600_35250">
+                          <div class="sqs-block-content">&nbsp;</div>
+                        </div>
+                      </div>
+                      <div class="col sqs-col-3 span-3">
+                        <div class="sqs-block html-block sqs-block-html" data-block-type="2"
+                          id="block-yui_3_17_2_1_1413555146600_23182">
+                          <div class="sqs-block-content">
+                            <h3 style="white-space:pre-wrap;"><strong>Tel</strong></h3>
+                            <p class="" style="white-space:pre-wrap;">+36 555 5555 &nbsp;</p>
+                            <h3 style="white-space:pre-wrap;"><strong>Cím</strong></h3>
+                            <p class="" style="white-space:pre-wrap;">Jászai Mari tér x.<br></p>
+                            <h3 style="white-space:pre-wrap;">Nyitvatartás</h3>
+                            <p class="" style="white-space:pre-wrap;"><strong>Hétfől-Vasárnapig </strong>10am – 8pm<br></p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- For Galleries -->
+
+
+
+              <!-- For Albums -->
+
+
+
+            </div>
+          </div>
+
+          <div id="new-page-2-section" class="index-section no-main-image page" data-url-id="new-page-2"
+            data-collection-id="5b4780c4aa4a996c82ed5cd0" data-edit-main-image="Background">
+            <div class="index-section-wrapper">
+
+              <!-- For Pages -->
+
+
+
+
+
+
+
+              <div class="content page-content" id="new-page-2-page" data-url-id="new-page-2" style="background-color: #dbdcdd48;">
+                <div class="content-inner has-content">
+                  <div class="sqs-layout sqs-grid-12 columns-12" data-type="page" data-updated-on="1569935414546"
+                    id="page-5b4780c4aa4a996c82ed5cd0">
+                    <div class="row sqs-row">
+                      <div class="col sqs-col-12 span-12">
+                        <div class="sqs-block html-block sqs-block-html" data-block-type="2"
+                          id="block-5b4780c4aa4a996c82ed5cd1">
+                          <div class="sqs-block-content">
+                            <h2 style="text-align:center;white-space:pre-wrap;">“nice quote comes here”</h2>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- For Galleries -->
+
+
+
+              <!-- For Albums -->
+
+
+
+            </div>
+          </div>
+
+          <div id="new-gallery-section" class="index-section gallery" data-url-id="new-gallery"
+            data-collection-id="5a25658b419202014ee36fb2">
+            <div class="index-section-wrapper has-main-media has-main-image">
+
+              <!-- For Pages -->
+
+
+
+              <!-- For Galleries -->
+
+
+              <div class="content gallery-content clear" id="new-gallery-gallery" data-url-id="new-gallery">
+                <div class="content-inner has-content">
+
+                  <div class="index-gallery">
+                    <div class="gallery-wrapper ">
+
+
+                      <div class="slide-wrapper">
+                        <div class="slide" data-slide-id="5bd9859b21c67ccf91137449"
+                          data-slide-url="aibtlotapt5xmyzsjbw9yctsdhghbo">
+
+
+
+
+                          <noscript><img
+                              src="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1540982182015-PBNVRT78T4G2LTFQGMKW/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+promo-1572.jpg"
+                              alt="the barbery promo-1572.jpg" /></noscript><img class="load-false"
+                            data-src="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1540982182015-PBNVRT78T4G2LTFQGMKW/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+promo-1572.jpg"
+                            data-image="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1540982182015-PBNVRT78T4G2LTFQGMKW/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+promo-1572.jpg"
+                            data-image-dimensions="2400x1602" data-image-focal-point="0.5,0.5"
+                            alt="the barbery promo-1572.jpg" data-load="false" data-image-id="5bd9859b21c67ccf91137449"
+                            data-type="image" />
+
+
+
+
+                        </div>
+                      </div>
+
+                      <div class="slide-wrapper">
+                        <div class="slide" data-slide-id="5c0ef7304ae2379685e67cdd"
+                          data-slide-url="2018/12/10/cz7rax85yiiw57ou7zickxguy1cjr9">
+
+
+
+
+                          <noscript><img
+                              src="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1544484666410-0PLQM76BQCUIG99UGCLD/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+promo-1125+%281%29.jpg"
+                              alt="the barbery promo-1125 (1).jpg" /></noscript><img class="load-false"
+                            data-src="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1544484666410-0PLQM76BQCUIG99UGCLD/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+promo-1125+%281%29.jpg"
+                            data-image="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1544484666410-0PLQM76BQCUIG99UGCLD/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+promo-1125+%281%29.jpg"
+                            data-image-dimensions="2400x1602" data-image-focal-point="0.5,0.5"
+                            alt="the barbery promo-1125 (1).jpg" data-load="false"
+                            data-image-id="5c0ef7304ae2379685e67cdd" data-type="image" />
+
+
+
+
+                        </div>
+                      </div>
+
+                      <div class="slide-wrapper">
+                        <div class="slide" data-slide-id="5bd982e84fa51ae2f2295e8c"
+                          data-slide-url="v3g33ipslt1458epbd4h9m82whxtkq">
+
+
+
+
+                          <noscript><img
+                              src="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1540981487368-M3T7NW7I1Z6UZLS5HK8O/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+promo-1093.jpg"
+                              alt="the barbery promo-1093.jpg" /></noscript><img class="load-false"
+                            data-src="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1540981487368-M3T7NW7I1Z6UZLS5HK8O/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+promo-1093.jpg"
+                            data-image="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1540981487368-M3T7NW7I1Z6UZLS5HK8O/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+promo-1093.jpg"
+                            data-image-dimensions="2400x1602" data-image-focal-point="0.5,0.5"
+                            alt="the barbery promo-1093.jpg" data-load="false" data-image-id="5bd982e84fa51ae2f2295e8c"
+                            data-type="image" />
+
+
+
+
+                        </div>
+                      </div>
+
+                      <div class="slide-wrapper">
+                        <div class="slide" data-slide-id="5bd98308562fa7963a63a428"
+                          data-slide-url="f3i3nyqjmeb0qv5768sp2ltfii15e2">
+
+
+
+
+                          <noscript><img
+                              src="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1540981520681-NWJXHYP3GYMFWPOAXDLQ/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+promo-1557+copy.jpg"
+                              alt="the barbery promo-1557 copy.jpg" /></noscript><img class="load-false"
+                            data-src="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1540981520681-NWJXHYP3GYMFWPOAXDLQ/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+promo-1557+copy.jpg"
+                            data-image="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1540981520681-NWJXHYP3GYMFWPOAXDLQ/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+promo-1557+copy.jpg"
+                            data-image-dimensions="2400x1602" data-image-focal-point="0.5,0.5"
+                            alt="the barbery promo-1557 copy.jpg" data-load="false"
+                            data-image-id="5bd98308562fa7963a63a428" data-type="image" />
+
+
+
+
+                        </div>
+                      </div>
+
+                      <div class="slide-wrapper">
+                        <div class="slide" data-slide-id="5bd9836340ec9a47eca09ef0"
+                          data-slide-url="zu69ds7vo7w8jmg0v3edd3lhbgezu1">
+
+
+
+
+                          <noscript><img
+                              src="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1540981609840-KDR8R4JCQJGK26IXAUNZ/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+promo-1408.jpg"
+                              alt="the barbery promo-1408.jpg" /></noscript><img class="load-false"
+                            data-src="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1540981609840-KDR8R4JCQJGK26IXAUNZ/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+promo-1408.jpg"
+                            data-image="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1540981609840-KDR8R4JCQJGK26IXAUNZ/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+promo-1408.jpg"
+                            data-image-dimensions="2400x1602" data-image-focal-point="0.5,0.5"
+                            alt="the barbery promo-1408.jpg" data-load="false" data-image-id="5bd9836340ec9a47eca09ef0"
+                            data-type="image" />
+
+
+
+
+                        </div>
+                      </div>
+
+                      <div class="slide-wrapper">
+                        <div class="slide" data-slide-id="5bd98493032be42267116529"
+                          data-slide-url="ea5s21io9fzv8fmhxbav67avelohl6">
+
+
+
+
+                          <noscript><img
+                              src="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1540981917871-OCRJL1GOHN9SI5WF1D0M/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+promo-1198.jpg"
+                              alt="the barbery promo-1198.jpg" /></noscript><img class="load-false"
+                            data-src="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1540981917871-OCRJL1GOHN9SI5WF1D0M/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+promo-1198.jpg"
+                            data-image="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1540981917871-OCRJL1GOHN9SI5WF1D0M/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+promo-1198.jpg"
+                            data-image-dimensions="2400x1602" data-image-focal-point="0.5,0.5"
+                            alt="the barbery promo-1198.jpg" data-load="false" data-image-id="5bd98493032be42267116529"
+                            data-type="image" />
+
+
+
+
+                        </div>
+                      </div>
+
+                      <div class="slide-wrapper">
+                        <div class="slide" data-slide-id="5bd984b0562fa7963a63ae8e"
+                          data-slide-url="qdkruox1l2wbikhqyxcn6h12euruhr">
+
+
+
+
+                          <noscript><img
+                              src="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1540981944502-BKZ19Y7VKCIU9GCVCDE7/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+promo-1073.jpg"
+                              alt="the barbery promo-1073.jpg" /></noscript><img class="load-false"
+                            data-src="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1540981944502-BKZ19Y7VKCIU9GCVCDE7/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+promo-1073.jpg"
+                            data-image="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1540981944502-BKZ19Y7VKCIU9GCVCDE7/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+promo-1073.jpg"
+                            data-image-dimensions="2400x1602" data-image-focal-point="0.5,0.5"
+                            alt="the barbery promo-1073.jpg" data-load="false" data-image-id="5bd984b0562fa7963a63ae8e"
+                            data-type="image" />
+
+
+
+
+                        </div>
+                      </div>
+
+                      <div class="slide-wrapper">
+                        <div class="slide" data-slide-id="5c0ef87eaa4a99f7e989ae36"
+                          data-slide-url="2018/12/10/b03c50h5eogn9naqg1e7qus4m9z6nj">
+
+
+
+
+                          <noscript><img
+                              src="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1544485004108-LWFJ9XLSH0I4LSPJDXCN/ke17ZwdGBToddI8pDm48kE8FbVBgiMc4u4Rma1Kp4Q57gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1Uah1jcF3UpxvIxPUHCsQHLV9ZCJk3pf4L21l4Fcn4YHWaHwHiHCbTxCLo3H57L5Cyw/the+barbery+promo-1135.jpg"
+                              alt="the barbery promo-1135.jpg" /></noscript><img class="load-false"
+                            data-src="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1544485004108-LWFJ9XLSH0I4LSPJDXCN/ke17ZwdGBToddI8pDm48kE8FbVBgiMc4u4Rma1Kp4Q57gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1Uah1jcF3UpxvIxPUHCsQHLV9ZCJk3pf4L21l4Fcn4YHWaHwHiHCbTxCLo3H57L5Cyw/the+barbery+promo-1135.jpg"
+                            data-image="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1544485004108-LWFJ9XLSH0I4LSPJDXCN/ke17ZwdGBToddI8pDm48kE8FbVBgiMc4u4Rma1Kp4Q57gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1Uah1jcF3UpxvIxPUHCsQHLV9ZCJk3pf4L21l4Fcn4YHWaHwHiHCbTxCLo3H57L5Cyw/the+barbery+promo-1135.jpg"
+                            data-image-dimensions="1602x2400" data-image-focal-point="0.5,0.5"
+                            alt="the barbery promo-1135.jpg" data-load="false" data-image-id="5c0ef87eaa4a99f7e989ae36"
+                            data-type="image" />
+
+
+
+
+                        </div>
+                      </div>
+
+                      <div class="slide-wrapper">
+                        <div class="slide" data-slide-id="5bd984cf88251bdf71778add"
+                          data-slide-url="a1yr050ejtngi089mx8qk4e28huzuc">
+
+
+
+
+                          <noscript><img
+                              src="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1540981977600-9ZY87IUWHEELWNHSG0U5/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+promo-1240.jpg"
+                              alt="the barbery promo-1240.jpg" /></noscript><img class="load-false"
+                            data-src="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1540981977600-9ZY87IUWHEELWNHSG0U5/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+promo-1240.jpg"
+                            data-image="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1540981977600-9ZY87IUWHEELWNHSG0U5/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+promo-1240.jpg"
+                            data-image-dimensions="2400x1602" data-image-focal-point="0.5,0.5"
+                            alt="the barbery promo-1240.jpg" data-load="false" data-image-id="5bd984cf88251bdf71778add"
+                            data-type="image" />
+
+
+
+
+                        </div>
+                      </div>
+
+                      <div class="slide-wrapper">
+                        <div class="slide" data-slide-id="5c0efadb032be447e433d0fe"
+                          data-slide-url="2018/12/10/tyv19mbu3eqh565jt0jzxszapog4q8">
+
+
+
+
+                          <noscript><img
+                              src="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1544485627198-DHY3052AMTD4XVKZFSXG/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+model+promo-2644.jpg"
+                              alt="the barbery model promo-2644.jpg" /></noscript><img class="load-false"
+                            data-src="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1544485627198-DHY3052AMTD4XVKZFSXG/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+model+promo-2644.jpg"
+                            data-image="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1544485627198-DHY3052AMTD4XVKZFSXG/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+model+promo-2644.jpg"
+                            data-image-dimensions="2400x1602" data-image-focal-point="0.5,0.5"
+                            alt="the barbery model promo-2644.jpg" data-load="false"
+                            data-image-id="5c0efadb032be447e433d0fe" data-type="image" />
+
+
+
+
+                        </div>
+                      </div>
+
+                      <div class="slide-wrapper">
+                        <div class="slide" data-slide-id="5c0ef79a562fa7e00fa0850d"
+                          data-slide-url="2018/12/10/26kydjoxh4gg78x1vhas09ov9spcrd">
+
+
+
+
+                          <noscript><img
+                              src="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1544484780014-P0A8S1L0QDCUYWRWAXPJ/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+promo-1040.jpg"
+                              alt="the barbery promo-1040.jpg" /></noscript><img class="load-false"
+                            data-src="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1544484780014-P0A8S1L0QDCUYWRWAXPJ/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+promo-1040.jpg"
+                            data-image="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1544484780014-P0A8S1L0QDCUYWRWAXPJ/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+promo-1040.jpg"
+                            data-image-dimensions="2400x1602" data-image-focal-point="0.5,0.5"
+                            alt="the barbery promo-1040.jpg" data-load="false" data-image-id="5c0ef79a562fa7e00fa0850d"
+                            data-type="image" />
+
+
+
+
+                        </div>
+                      </div>
+
+                      <div class="slide-wrapper">
+                        <div class="slide" data-slide-id="5c19196588251b7ea836658d"
+                          data-slide-url="ezigl0zqpjd7qlaf9q8pq6oasw3r4w">
+
+
+
+
+                          <noscript><img
+                              src="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1545148778136-EJ1V5TV3IESC59WATA3G/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+model+promo-2416.jpg"
+                              alt="the barbery model promo-2416.jpg" /></noscript><img class="load-false"
+                            data-src="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1545148778136-EJ1V5TV3IESC59WATA3G/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+model+promo-2416.jpg"
+                            data-image="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1545148778136-EJ1V5TV3IESC59WATA3G/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+model+promo-2416.jpg"
+                            data-image-dimensions="2400x1602" data-image-focal-point="0.5,0.5"
+                            alt="the barbery model promo-2416.jpg" data-load="false"
+                            data-image-id="5c19196588251b7ea836658d" data-type="image" />
+
+
+
+
+                        </div>
+                      </div>
+
+                      <div class="slide-wrapper">
+                        <div class="slide" data-slide-id="5c0ef6f889858336ab25d261"
+                          data-slide-url="2018/12/10/by3mtsh4p1xyqclyl5rpvsky1lskd1">
+
+
+
+
+                          <noscript><img
+                              src="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1544484873174-LMRGHQNZMN3X5N00FUZA/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+promo-1032.jpg"
+                              alt="the barbery promo-1032.jpg" /></noscript><img class="load-false"
+                            data-src="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1544484873174-LMRGHQNZMN3X5N00FUZA/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+promo-1032.jpg"
+                            data-image="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1544484873174-LMRGHQNZMN3X5N00FUZA/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+promo-1032.jpg"
+                            data-image-dimensions="2400x1602" data-image-focal-point="1.0,-0.007341867469879518"
+                            alt="the barbery promo-1032.jpg" data-load="false" data-image-id="5c0ef6f889858336ab25d261"
+                            data-type="image" />
+
+
+
+
+                        </div>
+                      </div>
+
+
+                    </div>
+
+
+                    <span class="arrow previous-slide"></span>
+                    <span class="arrow next-slide"></span>
+
+
+                    <div class="circles gallery-nav multi-image">
+
+
+                      <span class="circle"></span>
+
+                      <span class="circle"></span>
+
+                      <span class="circle"></span>
+
+                      <span class="circle"></span>
+
+                      <span class="circle"></span>
+
+                      <span class="circle"></span>
+
+                      <span class="circle"></span>
+
+                      <span class="circle"></span>
+
+                      <span class="circle"></span>
+
+                      <span class="circle"></span>
+
+                      <span class="circle"></span>
+
+                      <span class="circle"></span>
+
+                      <span class="circle"></span>
+
+
+                    </div>
+
+                  </div>
+
+
+                </div>
+              </div>
+
+
+              <!-- For Albums -->
+
+
+
+            </div>
+          </div>
+
+          <div id="treatments-section" class="index-section no-main-image page" data-url-id="treatments"
+            data-collection-id="5a2571069140b7c0ead7de80" data-edit-main-image="Background">
+            <div class="index-section-wrapper">
+
+              <!-- For Pages -->
+
+
+
+
+
+
+
+              <div class="content page-content" id="treatments-page" data-url-id="treatments">
+                <div class="content-inner has-content">
+                  <div class="sqs-layout sqs-grid-12 columns-12" data-type="page" data-updated-on="1561988694890"
+                    id="page-5a2571069140b7c0ead7de80">
+                    <div class="row sqs-row">
+                      <div class="col sqs-col-12 span-12">
+                        <div class="sqs-block html-block sqs-block-html" data-block-type="2"
+                          id="block-yui_3_17_2_7_1512403066118_5994">
+                          <div class="sqs-block-content">
+                            <h1 style="text-align:center;white-space:pre-wrap;">We don’t just Cut hair,<br>we treat it
+                              too!</h1>
+                          </div>
+                        </div>
+                        <div class="row sqs-row">
+                          <div class="col sqs-col-3 span-3">
+                            <div class="sqs-block spacer-block sqs-block-spacer sized vsize-1" data-block-type="21"
+                              id="block-yui_3_17_2_1_1523983715762_106054">
+                              <div class="sqs-block-content">&nbsp;</div>
+                            </div>
+                          </div>
+                          <div class="col sqs-col-6 span-6">
+                            <div class="sqs-block html-block sqs-block-html" data-block-type="2"
+                              id="block-yui_3_17_2_1_1523983715762_87807">
+                              <div class="sqs-block-content">
+                                <p style="text-align:center;white-space:pre-wrap;" class="">The treatment types comes here&nbsp;</p>
+                                
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col sqs-col-3 span-3">
+                            <div class="sqs-block spacer-block sqs-block-spacer sized vsize-1" data-block-type="21"
+                              id="block-yui_3_17_2_1_1523983715762_104519">
+                              <div class="sqs-block-content">&nbsp;</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- For Galleries -->
+
+
+
+              <!-- For Albums -->
+
+
+
+            </div>
+          </div>
+
+          <div id="contact-section" class="index-section no-main-image page" data-url-id="contact"
+            data-collection-id="5a25773b085229cadef26521" data-edit-main-image="Background">
+            <div class="index-section-wrapper">
+
+              <!-- For Pages -->
+
+
+
+
+
+
+
+              <div class="content page-content" id="contact-page" data-url-id="contact">
+                <div class="content-inner has-content">
+                  <div class="sqs-layout sqs-grid-12 columns-12" data-type="page" data-updated-on="1557751242018"
+                    id="page-5a25773b085229cadef26521">
+                    <div class="row sqs-row">
+                      <div class="col sqs-col-12 span-12">
+                        <div class="sqs-block html-block sqs-block-html" data-block-type="2"
+                          id="block-yui_3_17_2_2_1517916656223_17595">
+                          <div class="sqs-block-content">
+                            <h1 style="text-align:center;white-space:pre-wrap;">Contact</h1>
+                          </div>
+                        </div>
+                        <div class="sqs-block spacer-block sqs-block-spacer" data-aspect-ratio="2.1739130434782608"
+                          data-block-type="21" id="block-yui_3_17_2_2_1512470147558_30474">
+                          <div class="sqs-block-content">&nbsp;</div>
+                        </div>
+                        <div class="row sqs-row">
+                          <div class="col sqs-col-5 span-5">
+                            <div class="sqs-block html-block sqs-block-html" data-block-type="2"
+                              id="block-53d3f23b155f3f328751">
+                              <div class="sqs-block-content">
+                                <h2 style="white-space:pre-wrap;"><strong>Location</strong></h2>
+                                <p class="" style="white-space:pre-wrap;">The Barbery<br>29 Webber
+                                  Street<br>London<br>SE1 8QW<br>&nbsp;</p>
+                                <p class="" style="white-space:pre-wrap;"><strong>Southwark Tube -&nbsp;</strong>five
+                                  minutes' walk<br><strong>Waterloo Tube -&nbsp;</strong>six minutes'
+                                  walk<br><strong>Elephant &amp; Castle Tube -&nbsp;</strong>ten minutes' walk<br>&nbsp;
+                                </p>
+                                <p class="" style="white-space:pre-wrap;"><a href="https://goo.gl/maps/LVth7xKFB2K2"
+                                    target="_blank"><strong>Plan your Journey&nbsp;here with Google
+                                      Maps</strong></a><strong><br></strong><a
+                                    href="https://citymapper.com/go/jmted9jhjj" target="_blank"><strong>Find a route
+                                      here with Citymapper</strong></a><strong><br></strong></p>
+                                <p class="" style="white-space:pre-wrap;"><strong>NB: Please note our entrance is on
+                                    Webber Street.</strong></p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col sqs-col-7 span-7">
+                            <div class="sqs-block image-block sqs-block-image" data-block-type="5"
+                              id="block-yui_3_17_2_1_1524750664345_9116">
+                              <div class="sqs-block-content">
+
+
+
+
+                                <div
+                                  class="image-block-outer-wrapper layout-caption-hidden design-layout-inline combination-animation-none individual-animation-none individual-text-animation-none">
+
+                                  <div class="intrinsic" style="max-width:2298.0px;">
+
+                                    <div style="padding-bottom:71.80156707763672%;"
+                                      class="image-block-wrapper   has-aspect-ratio" data-animation-tier="1"
+                                      data-description="">
+                                      <noscript><img
+                                          src="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1540501166048-WO3Z1JMQL7RW7M0RMM01/ke17ZwdGBToddI8pDm48kM0FBzChG2hxSVDOM7JVsEF7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UanjOX_SvYO35ri3-oYKKRVlA3WpAhtvgApiZ8Pxxn5xm7cT0R_dexc_UL_zbpz6JQ/Map-01.png"
+                                          alt="Map-01.png" /></noscript><img class="thumb-image"
+                                        data-src="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1540501166048-WO3Z1JMQL7RW7M0RMM01/ke17ZwdGBToddI8pDm48kM0FBzChG2hxSVDOM7JVsEF7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UanjOX_SvYO35ri3-oYKKRVlA3WpAhtvgApiZ8Pxxn5xm7cT0R_dexc_UL_zbpz6JQ/Map-01.png"
+                                        data-image="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1540501166048-WO3Z1JMQL7RW7M0RMM01/ke17ZwdGBToddI8pDm48kM0FBzChG2hxSVDOM7JVsEF7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UanjOX_SvYO35ri3-oYKKRVlA3WpAhtvgApiZ8Pxxn5xm7cT0R_dexc_UL_zbpz6JQ/Map-01.png"
+                                        data-image-dimensions="2298x1650" data-image-focal-point="0.5,0.5"
+                                        alt="Map-01.png" data-load="false" data-image-id="5b46133c88251bfe9f4558b5"
+                                        data-type="image" />
+                                    </div>
+
+
+
+
+                                  </div>
+
+                                </div>
+
+
+
+
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="sqs-block spacer-block sqs-block-spacer sized vsize-1" data-block-type="21"
+                          id="block-yui_3_17_2_2_1517925137949_155294">
+                          <div class="sqs-block-content">&nbsp;</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- For Galleries -->
+
+
+
+              <!-- For Albums -->
+
+
+
+            </div>
+          </div>
+
+          <div id="products-section" class="index-section page" data-url-id="products"
+            data-collection-id="5a25876de2c48397fec0ed15" data-edit-main-image="Background">
+            <div class="index-section-wrapper has-main-media has-main-image">
+
+              <!-- For Pages -->
+
+
+
+
+
+              <div class="index-section-image content-fill">
+                <img
+                  data-src="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1515428173277-LFANSYIZ1VPBVJLG1FR3/ke17ZwdGBToddI8pDm48kJqHQCADf9toH0kObUBow6JtNQXHdW97T1OTad-1zWjwugV32LAXTFQ-wqgxnyrLLt9Ax5-uc4x4N0kXPSkfiTQpzqQqME1zoi_NUqPdlz4pk7cdyn__qMcp9i5OcJKeGQ/Untitled-3.gif"
+                  data-image="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1515428173277-LFANSYIZ1VPBVJLG1FR3/ke17ZwdGBToddI8pDm48kJqHQCADf9toH0kObUBow6JtNQXHdW97T1OTad-1zWjwugV32LAXTFQ-wqgxnyrLLt9Ax5-uc4x4N0kXPSkfiTQpzqQqME1zoi_NUqPdlz4pk7cdyn__qMcp9i5OcJKeGQ/Untitled-3.gif"
+                  data-image-dimensions="1x1" data-image-focal-point="0.5,0.5" alt="Untitled-3.gif" />
+              </div>
+              <div class="index-image-overlay"></div>
+
+
+
+              <div class="content page-content has-main-media has-main-image tmpl-loading" id="products-page"
+                data-url-id="products">
+                <div class="content-inner has-content">
+                  <div class="sqs-layout sqs-grid-12 columns-12" data-type="page" data-updated-on="1569935280180"
+                    id="page-5a25876de2c48397fec0ed15">
+                    <div class="row sqs-row">
+                      <div class="col sqs-col-7 span-7">
+                        <div class="sqs-block image-block sqs-block-image" data-aspect-ratio="72.04861111111111"
+                          data-block-type="5" id="block-6701fcf198a599efeae5">
+                          <div class="sqs-block-content">
+
+
+
+
+                            <div
+                              class="image-block-outer-wrapper layout-caption-hidden design-layout-inline combination-animation-fade-in individual-animation-none individual-text-animation-none">
+
+                              <div class="intrinsic" style="max-width:2400.0px;">
+
+                                <a href="http://www.oway.co.uk" target="_blank">
+
+                                  <div style="padding-bottom:72.04861450195312%;"
+                                    class="image-block-wrapper   has-aspect-ratio" data-animation-tier="1"
+                                    data-description="">
+                                    <noscript><img
+                                        src="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1544484780014-P0A8S1L0QDCUYWRWAXPJ/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+promo-1040.jpg"
+                                        alt="the barbery promo-1040.jpg" /></noscript><img class="thumb-image"
+                                      data-src="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1544484780014-P0A8S1L0QDCUYWRWAXPJ/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+promo-1040.jpg"
+                                      data-image="https://images.squarespace-cdn.com/content/v1/5a254ea69f07f5c89412eac9/1544484780014-P0A8S1L0QDCUYWRWAXPJ/ke17ZwdGBToddI8pDm48kLUlInGHr3yZ8VaDf7FvjIN7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UQMWKbUUuaV-EpzDziXPdS212yXY2R1Vm7G_O2FptHFDNqcg1uYJ0UckdvGUXVHAnA/the+barbery+promo-1040.jpg"
+                                      data-image-dimensions="2400x1602" data-image-focal-point="0.5,0.5"
+                                      alt="the barbery promo-1040.jpg" data-load="false"
+                                      data-image-id="5d934f72b5cea356b3db36b7" data-type="image" />
+                                  </div>
+
+                                </a>
+
+
+
+
+                              </div>
+
+                            </div>
+
+
+
+
+
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col sqs-col-5 span-5">
+                        <div class="sqs-block html-block sqs-block-html" data-block-type="2"
+                          id="block-1e92e8dbc7b0a3c55735">
+                          <div class="sqs-block-content">
+                            <h2 style="white-space:pre-wrap;"><strong>PRODUCTS</strong></h2>
+                            <p class="" style="white-space:pre-wrap;">Oway products are rich in organic, biodynamic
+                              ingredients. Rosemary, lemon balm, sage, thyme, mint and helichrysum are grown on
+                              Ortofficina, a bio-dynamic farm in Bologna, and processed without using chemicals or
+                              solvents.&nbsp;Stylish and recyclable packaging completes this exceptional hair care
+                              offering from a brand that partners with fair trade networks to deliver quality,
+                              consistency and transparency.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row sqs-row">
+                      <div class="col sqs-col-0 span-0"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- For Galleries -->
+
+
+
+              <!-- For Albums -->
+
+
+
+            </div>
+          </div>
+
+          <div id="new-page-1-section" class="index-section no-main-image page" data-url-id="new-page-1"
+            data-collection-id="5ad7b3df03ce646d1a0def9c" data-edit-main-image="Background">
+            <div class="index-section-wrapper">
+
+              <!-- For Pages -->
+
+
+
+
+
+
+
+              <div class="content page-content" id="new-page-1-page" data-url-id="new-page-1">
+                <div class="content-inner has-content">
+                  <div class="sqs-layout sqs-grid-12 columns-12" data-type="page" data-updated-on="1542221451303"
+                    id="page-5ad7b3df03ce646d1a0def9c">
+                    <div class="row sqs-row">
+                      <div class="col sqs-col-4 span-4">
+                        <div class="sqs-block html-block sqs-block-html" data-block-type="2"
+                          id="block-12b856bfa971a2612ba2">
+                          <div class="sqs-block-content">
+                            <h2 style="white-space: pre-wrap;"><strong>Biodynamic, What Does It Mean?</strong></h2>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col sqs-col-8 span-8">
+                        <div class="sqs-block html-block sqs-block-html" data-block-type="2"
+                          id="block-76605cc8c8d86241be17">
+                          <div class="sqs-block-content">
+                            <p style="white-space: pre-wrap;">Shortly before opening, The Barbery had the pleasure of
+                              receiving product training from Oway, the organic biodynamic and near-vegan (two of their
+                              products contain honey) haircare range we are collaborating with to treat our clients. I
+                              thought I would share with you what we learnt about how Oway grow the ingredients we find
+                              in their products.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row sqs-row">
+                      <div class="col sqs-col-12 span-12">
+                        <div class="sqs-block horizontalrule-block sqs-block-horizontalrule" data-block-type="47"
+                          id="block-yui_3_17_2_1_1524085730098_14329">
+                          <div class="sqs-block-content">
+                            <hr />
+                          </div>
+                        </div>
+                        <div class="sqs-block button-block sqs-block-button" data-block-type="53"
+                          id="block-yui_3_17_2_1_1524086083287_26524">
+                          <div class="sqs-block-content">
+                            <div class="sqs-block-button-container--center" data-animation-tier="2"
+                              data-alignment="center" data-button-size="small">
+                              <a href="/new-blog-1"
+                                class="sqs-block-button-element--small sqs-block-button-element">Visit our blog</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- For Galleries -->
+
+
+
+              <!-- For Albums -->
+
+
+
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <div id="preFooter">
+        <div class="pre-footer-inner with-custom">
+          <div class="sqs-layout sqs-grid-12 columns-12 empty" data-layout-label="Pre-Footer Content"
+            data-type="block-field" data-updated-on="1517928766212" id="preFooterBlocks">
+            <div class="row sqs-row">
+              <div class="col sqs-col-12 span-12"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <footer id="footer" role="contentinfo">
+        <div class="footer-inner">
+          <div class="nav-wrapper back-to-top-nav">
+            <nav>
+              <div class="back-to-top"><a href="#header">Back to Top</a></div>
+            </nav>
+          </div>
+
+
+
+
+          <div class="sqs-layout sqs-grid-12 columns-12" data-layout-label="Footer Content" data-type="block-field"
+            data-updated-on="1569934839537" id="footerBlocks">
+            <div class="row sqs-row">
+              <div class="col sqs-col-4 span-4">
+                <div class="sqs-block socialaccountlinks-v2-block sqs-block-socialaccountlinks-v2" data-block-type="54"
+                  id="block-yui_3_17_2_2_1517925137949_216492">
+                  <div class="sqs-block-content">
+
+                    <div
+                      class="sqs-svg-icon--outer social-icon-alignment-left social-icons-color-white social-icons-size-extra-large social-icons-shape-circle social-icons-style-border">
+                      <nav class="sqs-svg-icon--list">
+                        <a href="http://instagram.com/thebarberylondon" target="_blank"
+                          class="sqs-svg-icon--wrapper instagram">
+                          <div>
+                            <svg class="sqs-svg-icon--social" viewBox="0 0 64 64">
+                              <use class="sqs-use--icon" xlink:href="#instagram-icon"></use>
+                              <use class="sqs-use--mask" xlink:href="#instagram-mask"></use>
+                            </svg>
+                          </div>
+                        </a><a href="https://business.facebook.com/TheBarberyLondon/?business_id=1682210118530648"
+                          target="_blank" class="sqs-svg-icon--wrapper facebook">
+                          <div>
+                            <svg class="sqs-svg-icon--social" viewBox="0 0 64 64">
+                              <use class="sqs-use--icon" xlink:href="#facebook-icon"></use>
+                              <use class="sqs-use--mask" xlink:href="#facebook-mask"></use>
+                            </svg>
+                          </div>
+                        </a>
+                      </nav>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col sqs-col-4 span-4">
+                <div class="sqs-block html-block sqs-block-html" data-block-type="2"
+                  id="block-yui_3_17_2_3_1517925137949_30383">
+                  <div class="sqs-block-content">
+                    <p class="" style="white-space:pre-wrap;">The Barbery<br>29 Webber Street<br>London<br>SE1 8QW</p>
+                    <p class="" style="white-space:pre-wrap;">+44 (0) 7500 899661</p>
+                    <p class="" style="white-space:pre-wrap;">&nbsp;sage@thebarberylondon.com</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col sqs-col-4 span-4">
+                <div class="sqs-block summary-v2-block sqs-block-summary-v2"
+                  data-block-json="&#123;&quot;hSize&quot;:null,&quot;floatDir&quot;:null,&quot;collectionId&quot;:&quot;5ae1f1b56d2a7310c13cb455&quot;,&quot;design&quot;:&quot;carousel&quot;,&quot;headerText&quot;:&quot;&lt;span style=\&quot;color:white;\&quot;&gt;&lt;b&gt;Testimonials&lt;/b&gt;&lt;/span&gt;&quot;,&quot;textSize&quot;:&quot;medium&quot;,&quot;pageSize&quot;:30,&quot;imageAspectRatio&quot;:&quot;1.5&quot;,&quot;columnWidth&quot;:270,&quot;gutter&quot;:60,&quot;listImageSize&quot;:30,&quot;listImageAlignment&quot;:&quot;left&quot;,&quot;slidesPerRow&quot;:1,&quot;textAlignment&quot;:&quot;left&quot;,&quot;showTitle&quot;:false,&quot;showThumbnail&quot;:false,&quot;showExcerpt&quot;:true,&quot;showReadMoreLink&quot;:false,&quot;showPrice&quot;:true,&quot;productQuickViewEnabled&quot;:false,&quot;showPastOrUpcomingEvents&quot;:&quot;upcoming&quot;,&quot;metadataPosition&quot;:&quot;above-title&quot;,&quot;primaryMetadata&quot;:&quot;date&quot;,&quot;secondaryMetadata&quot;:&quot;none&quot;,&quot;filter&quot;:&#123;&#125;,&quot;autoCrop&quot;:true,&quot;lightbox&quot;:false,&quot;mixedContent&quot;:true,&quot;blockId&quot;:&quot;d83f878f84c5d24b65a8&quot;&#125;"
+                  data-block-type="55" id="block-yui_3_17_2_1_1524753871823_20263">
+                  <div class="sqs-block-content">
+
+                    <div class="
+  summary-block-wrapper
+
+  summary-block-collection-type-blog
+
+  summary-block-setting-text-size-medium
+  summary-block-setting-text-align-left
+
+  summary-block-setting-design-carousel
+  summary-block-setting-design-list-thumbnail-left
+
+  summary-block-setting-metadata-position-above-title
+  summary-block-setting-primary-metadata-date
+  summary-block-setting-secondary-metadata-none
+
+  
+  
+  summary-block-setting-show-price
+  summary-block-setting-show-excerpt
+  
+
+  
+
+  sqs-gallery-design-carousel
+
+  
+  ">
+
+                      <div class="summary-item-list-container sqs-gallery-container">
+
+                        <header class="summary-block-header">
+
+                          <!-- Collection Title -->
+                          <div class="summary-heading">
+
+                            <span class="summary-header-text"><span
+                                style="color:white;"><b>Testimonials</b></span></span>
+
+                          </div>
+
+                          <!-- Carousel Nav -->
+                          <div class="summary-carousel-pager sqs-gallery-controls">
+                            <span class="summary-carousel-pager-next next"></span>
+                            <span class="summary-carousel-pager-prev previous"></span>
+                          </div>
+
+                        </header>
+
+                        <div class="summary-item-list sqs-gallery">
+
+
+
+                          <div class="
+          summary-item
+          summary-item-record-type-text
+          sqs-gallery-design-carousel-slide
+          
+          
+           summary-item-has-excerpt
+          
+          
+          summary-item-has-author
+          
+          ">
+
+
+
+                            <div class="summary-content sqs-gallery-meta-container">
+
+                              <!-- Metadata (Above Title) -->
+                              <div class="summary-metadata-container summary-metadata-container--above-title">
+
+                                <div class="summary-metadata summary-metadata--primary">
+
+
+                                  <!-- Timestamp -->
+                                  <time class="summary-metadata-item summary-metadata-item--date"
+                                    datetime="2019-06-21">Jun 21, 2019</time>
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+
+                                <div class="summary-metadata summary-metadata--secondary">
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+                              </div>
+
+
+
+                              <!-- Metadata (Below Title) -->
+                              <div class="summary-metadata-container summary-metadata-container--below-title">
+
+                                <div class="summary-metadata summary-metadata--primary">
+
+
+                                  <!-- Timestamp -->
+                                  <time class="summary-metadata-item summary-metadata-item--date"
+                                    datetime="2019-06-21">Jun 21, 2019</time>
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+
+                                <div class="summary-metadata summary-metadata--secondary">
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+                              </div>
+
+
+
+
+
+
+
+                              <!-- Excerpt -->
+                              <div class="summary-excerpt">
+                                <p class="" style="white-space:pre-wrap;">“This place is just amazing, it is so zen,
+                                  nice and relaxing. The service I received also was stunning and cheaper than many
+                                  others place I have been. Glass of rosemary water and dry apricots offered are indeed
+                                  a nice touch. Definitely my new barber.” Giuseppe, SE1</p>
+                              </div>
+
+
+
+
+
+
+
+                              <!-- Metadata (Below Content) -->
+                              <div class="summary-metadata-container summary-metadata-container--below-content">
+
+                                <div class="summary-metadata summary-metadata--primary">
+
+
+                                  <!-- Timestamp -->
+                                  <time class="summary-metadata-item summary-metadata-item--date"
+                                    datetime="2019-06-21">Jun 21, 2019</time>
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+
+                                <div class="summary-metadata summary-metadata--secondary">
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+                              </div>
+
+                            </div> <!-- End .summary-content -->
+
+                          </div> <!-- End .summary-item -->
+
+
+
+                          <div class="
+          summary-item
+          summary-item-record-type-text
+          sqs-gallery-design-carousel-slide
+          
+          
+           summary-item-has-excerpt
+          
+          
+          summary-item-has-author
+          
+          ">
+
+
+
+                            <div class="summary-content sqs-gallery-meta-container">
+
+                              <!-- Metadata (Above Title) -->
+                              <div class="summary-metadata-container summary-metadata-container--above-title">
+
+                                <div class="summary-metadata summary-metadata--primary">
+
+
+                                  <!-- Timestamp -->
+                                  <time class="summary-metadata-item summary-metadata-item--date"
+                                    datetime="2018-12-15">Dec 15, 2018</time>
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+
+                                <div class="summary-metadata summary-metadata--secondary">
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+                              </div>
+
+
+
+                              <!-- Metadata (Below Title) -->
+                              <div class="summary-metadata-container summary-metadata-container--below-title">
+
+                                <div class="summary-metadata summary-metadata--primary">
+
+
+                                  <!-- Timestamp -->
+                                  <time class="summary-metadata-item summary-metadata-item--date"
+                                    datetime="2018-12-15">Dec 15, 2018</time>
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+
+                                <div class="summary-metadata summary-metadata--secondary">
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+                              </div>
+
+
+
+
+
+
+
+                              <!-- Excerpt -->
+                              <div class="summary-excerpt">
+                                <p class="" style="white-space:pre-wrap;">“I have used The Barbery on a number of
+                                  occasions now and each time find it to be a thoroughly enjoyable yet professional
+                                  experience. Cheyleigh is attentive, knowledgeable and good fun always and I wouldn’t
+                                  go anywhere else!“ James, SE1</p>
+                              </div>
+
+
+
+
+
+
+
+                              <!-- Metadata (Below Content) -->
+                              <div class="summary-metadata-container summary-metadata-container--below-content">
+
+                                <div class="summary-metadata summary-metadata--primary">
+
+
+                                  <!-- Timestamp -->
+                                  <time class="summary-metadata-item summary-metadata-item--date"
+                                    datetime="2018-12-15">Dec 15, 2018</time>
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+
+                                <div class="summary-metadata summary-metadata--secondary">
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+                              </div>
+
+                            </div> <!-- End .summary-content -->
+
+                          </div> <!-- End .summary-item -->
+
+
+
+                          <div class="
+          summary-item
+          summary-item-record-type-text
+          sqs-gallery-design-carousel-slide
+          
+          
+           summary-item-has-excerpt
+          
+          
+          summary-item-has-author
+          
+          ">
+
+
+
+                            <div class="summary-content sqs-gallery-meta-container">
+
+                              <!-- Metadata (Above Title) -->
+                              <div class="summary-metadata-container summary-metadata-container--above-title">
+
+                                <div class="summary-metadata summary-metadata--primary">
+
+
+                                  <!-- Timestamp -->
+                                  <time class="summary-metadata-item summary-metadata-item--date"
+                                    datetime="2018-12-04">Dec 4, 2018</time>
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+
+                                <div class="summary-metadata summary-metadata--secondary">
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+                              </div>
+
+
+
+                              <!-- Metadata (Below Title) -->
+                              <div class="summary-metadata-container summary-metadata-container--below-title">
+
+                                <div class="summary-metadata summary-metadata--primary">
+
+
+                                  <!-- Timestamp -->
+                                  <time class="summary-metadata-item summary-metadata-item--date"
+                                    datetime="2018-12-04">Dec 4, 2018</time>
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+
+                                <div class="summary-metadata summary-metadata--secondary">
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+                              </div>
+
+
+
+
+
+
+
+                              <!-- Excerpt -->
+                              <div class="summary-excerpt">
+                                <p style="white-space: pre-wrap;">“Amazing ambience, very good taste, wonderful
+                                  experience.” Paul, SE1</p>
+                              </div>
+
+
+
+
+
+
+
+                              <!-- Metadata (Below Content) -->
+                              <div class="summary-metadata-container summary-metadata-container--below-content">
+
+                                <div class="summary-metadata summary-metadata--primary">
+
+
+                                  <!-- Timestamp -->
+                                  <time class="summary-metadata-item summary-metadata-item--date"
+                                    datetime="2018-12-04">Dec 4, 2018</time>
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+
+                                <div class="summary-metadata summary-metadata--secondary">
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+                              </div>
+
+                            </div> <!-- End .summary-content -->
+
+                          </div> <!-- End .summary-item -->
+
+
+
+                          <div class="
+          summary-item
+          summary-item-record-type-text
+          sqs-gallery-design-carousel-slide
+          
+          
+           summary-item-has-excerpt
+          
+          
+          summary-item-has-author
+          
+          ">
+
+
+
+                            <div class="summary-content sqs-gallery-meta-container">
+
+                              <!-- Metadata (Above Title) -->
+                              <div class="summary-metadata-container summary-metadata-container--above-title">
+
+                                <div class="summary-metadata summary-metadata--primary">
+
+
+                                  <!-- Timestamp -->
+                                  <time class="summary-metadata-item summary-metadata-item--date"
+                                    datetime="2018-11-12">Nov 12, 2018</time>
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+
+                                <div class="summary-metadata summary-metadata--secondary">
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+                              </div>
+
+
+
+                              <!-- Metadata (Below Title) -->
+                              <div class="summary-metadata-container summary-metadata-container--below-title">
+
+                                <div class="summary-metadata summary-metadata--primary">
+
+
+                                  <!-- Timestamp -->
+                                  <time class="summary-metadata-item summary-metadata-item--date"
+                                    datetime="2018-11-12">Nov 12, 2018</time>
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+
+                                <div class="summary-metadata summary-metadata--secondary">
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+                              </div>
+
+
+
+
+
+
+
+                              <!-- Excerpt -->
+                              <div class="summary-excerpt">
+                                <p style="white-space: pre-wrap;">“Very happy with my treatment today. The facial
+                                  especially was lovely!” Leigh, SE1</p>
+                              </div>
+
+
+
+
+
+
+
+                              <!-- Metadata (Below Content) -->
+                              <div class="summary-metadata-container summary-metadata-container--below-content">
+
+                                <div class="summary-metadata summary-metadata--primary">
+
+
+                                  <!-- Timestamp -->
+                                  <time class="summary-metadata-item summary-metadata-item--date"
+                                    datetime="2018-11-12">Nov 12, 2018</time>
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+
+                                <div class="summary-metadata summary-metadata--secondary">
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+                              </div>
+
+                            </div> <!-- End .summary-content -->
+
+                          </div> <!-- End .summary-item -->
+
+
+
+                          <div class="
+          summary-item
+          summary-item-record-type-text
+          sqs-gallery-design-carousel-slide
+          
+          
+           summary-item-has-excerpt
+          
+          
+          summary-item-has-author
+          
+          ">
+
+
+
+                            <div class="summary-content sqs-gallery-meta-container">
+
+                              <!-- Metadata (Above Title) -->
+                              <div class="summary-metadata-container summary-metadata-container--above-title">
+
+                                <div class="summary-metadata summary-metadata--primary">
+
+
+                                  <!-- Timestamp -->
+                                  <time class="summary-metadata-item summary-metadata-item--date"
+                                    datetime="2018-11-12">Nov 12, 2018</time>
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+
+                                <div class="summary-metadata summary-metadata--secondary">
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+                              </div>
+
+
+
+                              <!-- Metadata (Below Title) -->
+                              <div class="summary-metadata-container summary-metadata-container--below-title">
+
+                                <div class="summary-metadata summary-metadata--primary">
+
+
+                                  <!-- Timestamp -->
+                                  <time class="summary-metadata-item summary-metadata-item--date"
+                                    datetime="2018-11-12">Nov 12, 2018</time>
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+
+                                <div class="summary-metadata summary-metadata--secondary">
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+                              </div>
+
+
+
+
+
+
+
+                              <!-- Excerpt -->
+                              <div class="summary-excerpt">
+                                <p style="white-space: pre-wrap;">“I had great time with Megan who took great care of
+                                  me. In fact, my wife called it the best cut she has ever seen on me.” Mathieu, W4</p>
+                              </div>
+
+
+
+
+
+
+
+                              <!-- Metadata (Below Content) -->
+                              <div class="summary-metadata-container summary-metadata-container--below-content">
+
+                                <div class="summary-metadata summary-metadata--primary">
+
+
+                                  <!-- Timestamp -->
+                                  <time class="summary-metadata-item summary-metadata-item--date"
+                                    datetime="2018-11-12">Nov 12, 2018</time>
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+
+                                <div class="summary-metadata summary-metadata--secondary">
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+                              </div>
+
+                            </div> <!-- End .summary-content -->
+
+                          </div> <!-- End .summary-item -->
+
+
+
+                          <div class="
+          summary-item
+          summary-item-record-type-text
+          sqs-gallery-design-carousel-slide
+          
+          
+           summary-item-has-excerpt
+          
+          
+          summary-item-has-author
+          
+          ">
+
+
+
+                            <div class="summary-content sqs-gallery-meta-container">
+
+                              <!-- Metadata (Above Title) -->
+                              <div class="summary-metadata-container summary-metadata-container--above-title">
+
+                                <div class="summary-metadata summary-metadata--primary">
+
+
+                                  <!-- Timestamp -->
+                                  <time class="summary-metadata-item summary-metadata-item--date"
+                                    datetime="2018-11-12">Nov 12, 2018</time>
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+
+                                <div class="summary-metadata summary-metadata--secondary">
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+                              </div>
+
+
+
+                              <!-- Metadata (Below Title) -->
+                              <div class="summary-metadata-container summary-metadata-container--below-title">
+
+                                <div class="summary-metadata summary-metadata--primary">
+
+
+                                  <!-- Timestamp -->
+                                  <time class="summary-metadata-item summary-metadata-item--date"
+                                    datetime="2018-11-12">Nov 12, 2018</time>
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+
+                                <div class="summary-metadata summary-metadata--secondary">
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+                              </div>
+
+
+
+
+
+
+
+                              <!-- Excerpt -->
+                              <div class="summary-excerpt">
+                                <p style="white-space: pre-wrap;">“I loved my haircut and think you’ve created a very
+                                  welcoming and calm environment.” David, SE1</p>
+                              </div>
+
+
+
+
+
+
+
+                              <!-- Metadata (Below Content) -->
+                              <div class="summary-metadata-container summary-metadata-container--below-content">
+
+                                <div class="summary-metadata summary-metadata--primary">
+
+
+                                  <!-- Timestamp -->
+                                  <time class="summary-metadata-item summary-metadata-item--date"
+                                    datetime="2018-11-12">Nov 12, 2018</time>
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+
+                                <div class="summary-metadata summary-metadata--secondary">
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+                              </div>
+
+                            </div> <!-- End .summary-content -->
+
+                          </div> <!-- End .summary-item -->
+
+
+
+                          <div class="
+          summary-item
+          summary-item-record-type-text
+          sqs-gallery-design-carousel-slide
+          
+          
+           summary-item-has-excerpt
+          
+          
+          summary-item-has-author
+          
+          ">
+
+
+
+                            <div class="summary-content sqs-gallery-meta-container">
+
+                              <!-- Metadata (Above Title) -->
+                              <div class="summary-metadata-container summary-metadata-container--above-title">
+
+                                <div class="summary-metadata summary-metadata--primary">
+
+
+                                  <!-- Timestamp -->
+                                  <time class="summary-metadata-item summary-metadata-item--date"
+                                    datetime="2018-07-10">Jul 10, 2018</time>
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+
+                                <div class="summary-metadata summary-metadata--secondary">
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+                              </div>
+
+
+
+                              <!-- Metadata (Below Title) -->
+                              <div class="summary-metadata-container summary-metadata-container--below-title">
+
+                                <div class="summary-metadata summary-metadata--primary">
+
+
+                                  <!-- Timestamp -->
+                                  <time class="summary-metadata-item summary-metadata-item--date"
+                                    datetime="2018-07-10">Jul 10, 2018</time>
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+
+                                <div class="summary-metadata summary-metadata--secondary">
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+                              </div>
+
+
+
+
+
+
+
+                              <!-- Excerpt -->
+                              <div class="summary-excerpt">
+                                <p style="white-space: pre-wrap;">"The products have a natural and organic look and
+                                  feel, perfect for the shower shelf." Ollie, SW9</p>
+                              </div>
+
+
+
+
+
+
+
+                              <!-- Metadata (Below Content) -->
+                              <div class="summary-metadata-container summary-metadata-container--below-content">
+
+                                <div class="summary-metadata summary-metadata--primary">
+
+
+                                  <!-- Timestamp -->
+                                  <time class="summary-metadata-item summary-metadata-item--date"
+                                    datetime="2018-07-10">Jul 10, 2018</time>
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+
+                                <div class="summary-metadata summary-metadata--secondary">
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+                              </div>
+
+                            </div> <!-- End .summary-content -->
+
+                          </div> <!-- End .summary-item -->
+
+
+
+                          <div class="
+          summary-item
+          summary-item-record-type-text
+          sqs-gallery-design-carousel-slide
+          
+          
+           summary-item-has-excerpt
+          
+          
+          summary-item-has-author
+          
+          ">
+
+
+
+                            <div class="summary-content sqs-gallery-meta-container">
+
+                              <!-- Metadata (Above Title) -->
+                              <div class="summary-metadata-container summary-metadata-container--above-title">
+
+                                <div class="summary-metadata summary-metadata--primary">
+
+
+                                  <!-- Timestamp -->
+                                  <time class="summary-metadata-item summary-metadata-item--date"
+                                    datetime="2018-04-26">Apr 26, 2018</time>
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+
+                                <div class="summary-metadata summary-metadata--secondary">
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+                              </div>
+
+
+
+                              <!-- Metadata (Below Title) -->
+                              <div class="summary-metadata-container summary-metadata-container--below-title">
+
+                                <div class="summary-metadata summary-metadata--primary">
+
+
+                                  <!-- Timestamp -->
+                                  <time class="summary-metadata-item summary-metadata-item--date"
+                                    datetime="2018-04-26">Apr 26, 2018</time>
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+
+                                <div class="summary-metadata summary-metadata--secondary">
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+                              </div>
+
+
+
+
+
+
+
+                              <!-- Excerpt -->
+                              <div class="summary-excerpt">
+                                <p style="white-space: pre-wrap;">"The shaving cream aluminium tube being fully
+                                  recyclable is fantastic." Chris, SW9</p>
+                              </div>
+
+
+
+
+
+
+
+                              <!-- Metadata (Below Content) -->
+                              <div class="summary-metadata-container summary-metadata-container--below-content">
+
+                                <div class="summary-metadata summary-metadata--primary">
+
+
+                                  <!-- Timestamp -->
+                                  <time class="summary-metadata-item summary-metadata-item--date"
+                                    datetime="2018-04-26">Apr 26, 2018</time>
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+
+                                <div class="summary-metadata summary-metadata--secondary">
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+                              </div>
+
+                            </div> <!-- End .summary-content -->
+
+                          </div> <!-- End .summary-item -->
+
+
+
+                          <div class="
+          summary-item
+          summary-item-record-type-text
+          sqs-gallery-design-carousel-slide
+          
+          
+           summary-item-has-excerpt
+          
+          
+          summary-item-has-author
+          
+          ">
+
+
+
+                            <div class="summary-content sqs-gallery-meta-container">
+
+                              <!-- Metadata (Above Title) -->
+                              <div class="summary-metadata-container summary-metadata-container--above-title">
+
+                                <div class="summary-metadata summary-metadata--primary">
+
+
+                                  <!-- Timestamp -->
+                                  <time class="summary-metadata-item summary-metadata-item--date"
+                                    datetime="2018-04-26">Apr 26, 2018</time>
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+
+                                <div class="summary-metadata summary-metadata--secondary">
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+                              </div>
+
+
+
+                              <!-- Metadata (Below Title) -->
+                              <div class="summary-metadata-container summary-metadata-container--below-title">
+
+                                <div class="summary-metadata summary-metadata--primary">
+
+
+                                  <!-- Timestamp -->
+                                  <time class="summary-metadata-item summary-metadata-item--date"
+                                    datetime="2018-04-26">Apr 26, 2018</time>
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+
+                                <div class="summary-metadata summary-metadata--secondary">
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+                              </div>
+
+
+
+
+
+
+
+                              <!-- Excerpt -->
+                              <div class="summary-excerpt">
+                                <p style="white-space: pre-wrap;">"I really like the smells!" Matt W, SE1</p>
+                              </div>
+
+
+
+
+
+
+
+                              <!-- Metadata (Below Content) -->
+                              <div class="summary-metadata-container summary-metadata-container--below-content">
+
+                                <div class="summary-metadata summary-metadata--primary">
+
+
+                                  <!-- Timestamp -->
+                                  <time class="summary-metadata-item summary-metadata-item--date"
+                                    datetime="2018-04-26">Apr 26, 2018</time>
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+
+                                <div class="summary-metadata summary-metadata--secondary">
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+                              </div>
+
+                            </div> <!-- End .summary-content -->
+
+                          </div> <!-- End .summary-item -->
+
+
+
+                        </div> <!-- End .summary-item-list -->
+
+                      </div> <!-- End .summary-item-list-container -->
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row sqs-row">
+              <div class="col sqs-col-12 span-12">
+                <div class="sqs-block horizontalrule-block sqs-block-horizontalrule" data-block-type="47"
+                  id="block-yui_3_17_2_2_1518189436320_8504">
+                  <div class="sqs-block-content">
+                    <hr />
+                  </div>
+                </div>
+                <div class="sqs-block html-block sqs-block-html" data-block-type="2"
+                  id="block-yui_3_17_2_2_1518172635843_13418">
+                  <div class="sqs-block-content">
+                    <p style="text-align:center;white-space:pre-wrap;" class=""><a href="/new-page">Privacy policy</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+
+
+    </div>
+  </div>
+
+  <script src="https://static1.squarespace.com/static/ta/52e968b5e4b04d2aa2a3bba3/1120/scripts/site-bundle.js"
+    type="text/javascript"></script>
+
+  <script type="text/javascript"
+    data-sqs-type="imageloader-bootstrapper">(function () { if (window.ImageLoader) { window.ImageLoader.bootstrap({}, document); } })();</script>
+  <script>Squarespace.afterBodyLoad(Y);</script><svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+    style="display:none" data-usage="social-icons-svg">
+    <symbol id="instagram-icon" viewBox="0 0 64 64">
+      <path
+        d="M46.91,25.816c-0.073-1.597-0.326-2.687-0.697-3.641c-0.383-0.986-0.896-1.823-1.73-2.657c-0.834-0.834-1.67-1.347-2.657-1.73c-0.954-0.371-2.045-0.624-3.641-0.697C36.585,17.017,36.074,17,32,17s-4.585,0.017-6.184,0.09c-1.597,0.073-2.687,0.326-3.641,0.697c-0.986,0.383-1.823,0.896-2.657,1.73c-0.834,0.834-1.347,1.67-1.73,2.657c-0.371,0.954-0.624,2.045-0.697,3.641C17.017,27.415,17,27.926,17,32c0,4.074,0.017,4.585,0.09,6.184c0.073,1.597,0.326,2.687,0.697,3.641c0.383,0.986,0.896,1.823,1.73,2.657c0.834,0.834,1.67,1.347,2.657,1.73c0.954,0.371,2.045,0.624,3.641,0.697C27.415,46.983,27.926,47,32,47s4.585-0.017,6.184-0.09c1.597-0.073,2.687-0.326,3.641-0.697c0.986-0.383,1.823-0.896,2.657-1.73c0.834-0.834,1.347-1.67,1.73-2.657c0.371-0.954,0.624-2.045,0.697-3.641C46.983,36.585,47,36.074,47,32S46.983,27.415,46.91,25.816z M44.21,38.061c-0.067,1.462-0.311,2.257-0.516,2.785c-0.272,0.7-0.597,1.2-1.122,1.725c-0.525,0.525-1.025,0.85-1.725,1.122c-0.529,0.205-1.323,0.45-2.785,0.516c-1.581,0.072-2.056,0.087-6.061,0.087s-4.48-0.015-6.061-0.087c-1.462-0.067-2.257-0.311-2.785-0.516c-0.7-0.272-1.2-0.597-1.725-1.122c-0.525-0.525-0.85-1.025-1.122-1.725c-0.205-0.529-0.45-1.323-0.516-2.785c-0.072-1.582-0.087-2.056-0.087-6.061s0.015-4.48,0.087-6.061c0.067-1.462,0.311-2.257,0.516-2.785c0.272-0.7,0.597-1.2,1.122-1.725c0.525-0.525,1.025-0.85,1.725-1.122c0.529-0.205,1.323-0.45,2.785-0.516c1.582-0.072,2.056-0.087,6.061-0.087s4.48,0.015,6.061,0.087c1.462,0.067,2.257,0.311,2.785,0.516c0.7,0.272,1.2,0.597,1.725,1.122c0.525,0.525,0.85,1.025,1.122,1.725c0.205,0.529,0.45,1.323,0.516,2.785c0.072,1.582,0.087,2.056,0.087,6.061S44.282,36.48,44.21,38.061z M32,24.297c-4.254,0-7.703,3.449-7.703,7.703c0,4.254,3.449,7.703,7.703,7.703c4.254,0,7.703-3.449,7.703-7.703C39.703,27.746,36.254,24.297,32,24.297z M32,37c-2.761,0-5-2.239-5-5c0-2.761,2.239-5,5-5s5,2.239,5,5C37,34.761,34.761,37,32,37z M40.007,22.193c-0.994,0-1.8,0.806-1.8,1.8c0,0.994,0.806,1.8,1.8,1.8c0.994,0,1.8-0.806,1.8-1.8C41.807,22.999,41.001,22.193,40.007,22.193z" />
+    </symbol>
+    <symbol id="instagram-mask" viewBox="0 0 64 64">
+      <path
+        d="M43.693,23.153c-0.272-0.7-0.597-1.2-1.122-1.725c-0.525-0.525-1.025-0.85-1.725-1.122c-0.529-0.205-1.323-0.45-2.785-0.517c-1.582-0.072-2.056-0.087-6.061-0.087s-4.48,0.015-6.061,0.087c-1.462,0.067-2.257,0.311-2.785,0.517c-0.7,0.272-1.2,0.597-1.725,1.122c-0.525,0.525-0.85,1.025-1.122,1.725c-0.205,0.529-0.45,1.323-0.516,2.785c-0.072,1.582-0.087,2.056-0.087,6.061s0.015,4.48,0.087,6.061c0.067,1.462,0.311,2.257,0.516,2.785c0.272,0.7,0.597,1.2,1.122,1.725s1.025,0.85,1.725,1.122c0.529,0.205,1.323,0.45,2.785,0.516c1.581,0.072,2.056,0.087,6.061,0.087s4.48-0.015,6.061-0.087c1.462-0.067,2.257-0.311,2.785-0.516c0.7-0.272,1.2-0.597,1.725-1.122s0.85-1.025,1.122-1.725c0.205-0.529,0.45-1.323,0.516-2.785c0.072-1.582,0.087-2.056,0.087-6.061s-0.015-4.48-0.087-6.061C44.143,24.476,43.899,23.682,43.693,23.153z M32,39.703c-4.254,0-7.703-3.449-7.703-7.703s3.449-7.703,7.703-7.703s7.703,3.449,7.703,7.703S36.254,39.703,32,39.703z M40.007,25.793c-0.994,0-1.8-0.806-1.8-1.8c0-0.994,0.806-1.8,1.8-1.8c0.994,0,1.8,0.806,1.8,1.8C41.807,24.987,41.001,25.793,40.007,25.793z M0,0v64h64V0H0z M46.91,38.184c-0.073,1.597-0.326,2.687-0.697,3.641c-0.383,0.986-0.896,1.823-1.73,2.657c-0.834,0.834-1.67,1.347-2.657,1.73c-0.954,0.371-2.044,0.624-3.641,0.697C36.585,46.983,36.074,47,32,47s-4.585-0.017-6.184-0.09c-1.597-0.073-2.687-0.326-3.641-0.697c-0.986-0.383-1.823-0.896-2.657-1.73c-0.834-0.834-1.347-1.67-1.73-2.657c-0.371-0.954-0.624-2.044-0.697-3.641C17.017,36.585,17,36.074,17,32c0-4.074,0.017-4.585,0.09-6.185c0.073-1.597,0.326-2.687,0.697-3.641c0.383-0.986,0.896-1.823,1.73-2.657c0.834-0.834,1.67-1.347,2.657-1.73c0.954-0.371,2.045-0.624,3.641-0.697C27.415,17.017,27.926,17,32,17s4.585,0.017,6.184,0.09c1.597,0.073,2.687,0.326,3.641,0.697c0.986,0.383,1.823,0.896,2.657,1.73c0.834,0.834,1.347,1.67,1.73,2.657c0.371,0.954,0.624,2.044,0.697,3.641C46.983,27.415,47,27.926,47,32C47,36.074,46.983,36.585,46.91,38.184z M32,27c-2.761,0-5,2.239-5,5s2.239,5,5,5s5-2.239,5-5S34.761,27,32,27z" />
+    </symbol>
+    <symbol id="facebook-icon" viewBox="0 0 64 64">
+      <path
+        d="M34.1,47V33.3h4.6l0.7-5.3h-5.3v-3.4c0-1.5,0.4-2.6,2.6-2.6l2.8,0v-4.8c-0.5-0.1-2.2-0.2-4.1-0.2 c-4.1,0-6.9,2.5-6.9,7V28H24v5.3h4.6V47H34.1z" />
+    </symbol>
+    <symbol id="facebook-mask" viewBox="0 0 64 64">
+      <path
+        d="M0,0v64h64V0H0z M39.6,22l-2.8,0c-2.2,0-2.6,1.1-2.6,2.6V28h5.3l-0.7,5.3h-4.6V47h-5.5V33.3H24V28h4.6V24 c0-4.6,2.8-7,6.9-7c2,0,3.6,0.1,4.1,0.2V22z" />
+    </symbol>
   </svg>
 
-</div>
+</body>
 
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
-
+</html>
